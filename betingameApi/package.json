@@ -1,0 +1,22 @@
+{
+  "name": "betingameapi",
+  "version": "1.0.0",
+  "description": "api for betingame app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "samy navet",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.2",
+    "mysql": "^2.16.0",
+    "validator": "^10.10.0"
+  }
+}
