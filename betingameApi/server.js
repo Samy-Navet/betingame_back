@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const _ = require('lodash')
 
 var {mongoose} = require('./db/mongoose');
 var {User} = require('./Models/User');
@@ -99,14 +100,23 @@ app.get('/matchs/', authenticate, (req, res) =>{
         res.status(400).send(e);
     })
 })
-.delete('/matchs/', admin, (req,res) =>{
-    var id = req.body.id;
+.delete('/matchs/:id', admin, (req,res) =>{
+    var id = req.params.id;
 
-     Match.deleteOne({_id: id}).then((resut) =>{
+     Match.deleteOne({_id: id}).then((result) =>{
          res.status(200).send();
      }).catch((err) =>{
          res.status(400).send();
      })
+})
+.put('/matchs/:id', admin, (req,res) => {
+    var id = req.params.id
+    var body = req.body
+    Match.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
+        res.status(200).send()
+    }).catch((err) =>{
+        res.status(400).send()
+    })
 })
 
 app.listen(port, function() {
