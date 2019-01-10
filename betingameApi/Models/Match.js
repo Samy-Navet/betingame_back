@@ -2,8 +2,6 @@ const {ObjectID} = require('mongodb');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const _ = require('lodash')
-// const jwt = require('jsonwebtoken');
-// const bcrypt = require('bcryptjs');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/betingame');
