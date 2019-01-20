@@ -1,4 +1,4 @@
-"# betingame_back" 
+La version du master prête aux process de verification (coucou Adil) est maintenant datée du 20 janvier 2019
 
 installer mongodb
 installer robot 3T (phpmyadmin pour node)
