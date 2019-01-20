@@ -55,7 +55,15 @@ app.post('/user/', (req, res) =>{
 
 
 app.get('/user/:id', authenticate, (req,res) =>{
-   res.send(req.user);
+    var id = req.params.id
+    if(req.user._id == id){
+        console.log(req.user);
+        res.send(req.user);
+    }
+    else
+    {
+        res.status(401).send();
+    }
 })
 .delete('/user/:id', authenticate, (req, res) => {
     var id = req.params.id
@@ -72,11 +80,18 @@ app.get('/user/:id', authenticate, (req,res) =>{
     }
 })
 .delete('/user/:id/logout', authenticate, (req,res) =>{
-    req.user.removeToken(req.token).then(() =>{
-        res.status(200).send();
-    }, () =>{
-        res.status(400).send();
-    })
+    var id = req.params.id;
+    if(req.user._id == id){
+        req.user.removeToken(req.token).then(() =>{
+            res.status(200).send();
+        }, () =>{
+            res.status(400).send();
+        })
+    }
+    else
+    {
+        res.status(401).send();
+    }
 })
 .put('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
@@ -95,9 +110,7 @@ app.get('/user/:id', authenticate, (req,res) =>{
     }
     
 })
-
-
-app.get('/matchs/', authenticate, (req, res) =>{
+.get('/matchs/', authenticate, (req, res) =>{
     Match.find().then((matchs) =>{
         res.status(200).send(matchs)
     }).catch((e) =>{
