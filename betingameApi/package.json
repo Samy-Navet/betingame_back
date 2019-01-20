@@ -18,8 +18,5 @@
     "mongoose": "^5.4.2",
     "mysql": "^2.16.0",
     "validator": "^10.10.0"
-  },
-  "engines": {
-    "node": "8.6.0"
   }
 }
