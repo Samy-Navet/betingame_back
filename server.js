@@ -17,7 +17,10 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.post('/user/', (req, res) =>{
+app.get('/',(req,res) =>{
+    res.send('Bienvenue sur l\' api betingame ! utilisez postman pour tester toutes les routes !')
+})
+.post('/user/', (req, res) =>{
     var username = req.body.username
     var password = req.body.password
     var email = req.body.email
@@ -157,5 +160,5 @@ app.get('/user/:id', authenticate, (req,res) =>{
 })
 
 app.listen(port, function() {
-    console.log('Server en écoute :)');
+    console.log('Server en écoute :) port '+port);
 });
