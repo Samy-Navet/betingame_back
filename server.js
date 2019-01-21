@@ -134,7 +134,7 @@ app.get('/user/:id', authenticate, (req,res) =>{
         participant: participants
     })  
    
-    match.save().then((res) =>{
+    match.save().then((result) =>{
         res.status(200).send();
     }).catch((e) => {
         res.status(400).send(e);
