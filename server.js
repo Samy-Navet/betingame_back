@@ -158,7 +158,21 @@ app.get('/user/:id', authenticate, (req,res) =>{
         res.status(400).send()
     })
 })
-
+.post('/user/:id/panier', authenticate, (req,res) => {
+    var body = req.body;
+    var id = req.params.id;
+    User.findById(id).then((user) =>{
+        user.panier.push(body)
+        User.findByIdAndUpdate(id,{$set: user}, {new: true}).then((result) =>{
+            res.status(200).send(result)
+        }).catch((err) =>{
+            res.status(400).send()
+        })
+    }).catch((e) =>{
+        console.log(e);
+        res.status(400).send(e);
+    })
+})
 app.listen(port, function() {
     console.log('Server en écoute :) port '+port);
 });
