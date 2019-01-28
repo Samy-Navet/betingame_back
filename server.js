@@ -168,7 +168,8 @@ app.get('/user/:id', authenticate, (req,res) =>{
                 break;
             }
         };
-        if(typeof exist !== 'undefined' && exist !== true){
+    
+        if(typeof exist === 'undefined' || exist !== true){
             user.panier.push(body);
             User.findByIdAndUpdate(id,{$set: user}, {new: true}).then((result) =>{
                 res.status(200).send(result)
@@ -185,6 +186,21 @@ app.get('/user/:id', authenticate, (req,res) =>{
         res.status(400).send(e);
     })
 })
+.delete('/user/:id/panier', authenticate, (req, res) => {
+    var id = req.params.id;
+    User.findById(id).then((user) =>{
+        user.panier = [];
+        User.findByIdAndUpdate(id,{$set: user}, {new: true}).then((result) =>{
+            res.status(200).send(result)
+        }).catch((err) =>{
+            res.status(400).send()
+        }) 
+    })
+})
+.delete('/user/:id/panier/:match', authenticate, (req,res) =>{
+
+})
+
 app.listen(port, function() {
     console.log('Server en écoute :) port '+port);
 });
