@@ -66,7 +66,6 @@ app.get('/user', authenticate, (req,res) =>{
 .get('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
     if(req.user._id == id){
-        console.log(req.user);
         res.send(req.user);
     }
     else
@@ -206,8 +205,8 @@ app.get('/user', authenticate, (req,res) =>{
 .delete('/user/:id/panier/:match', authenticate, (req,res) =>{
     var id = req.params.id;
     var match = req.params.match;
-    User.find({'_id': id, 'panier._id': match}).then((user) =>{
-
+    User.findByIdAndUpdate(id,{$pull:{'panier': {'_id': match}}},{new: true}).then((user) =>{
+        res.status(200).send(user);
     })
     .catch((err) =>{
         res.status(400).send();
