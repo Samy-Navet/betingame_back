@@ -38,6 +38,20 @@ var UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  panier: [{
+    nomdumatch : {
+      type : String
+    },
+    participant : {
+      type : String
+    },
+    coteParticipant: {
+      type : Number
+    },
+    logoUrl : {
+      type : String
+    }
+  }],
   tokens: [{
     access: {
         type: String
@@ -52,7 +66,8 @@ UserSchema.methods.toJSON = function () {
   var user = this;
   var userObject = user.toObject();
 
-  return _.pick(userObject, ['_id', 'email']);
+  // return userObject;
+  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','panier']);
 };
 
 UserSchema.methods.generateAuthToken = function () {

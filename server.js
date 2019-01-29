@@ -56,8 +56,14 @@ app.get('/',(req,res) =>{
     });
 })
 
-
-app.get('/user/:id', authenticate, (req,res) =>{
+app.get('/user', authenticate, (req,res) =>{
+    User.find().then((users) =>{
+        res.status(200).send(users);
+    }).catch((e) =>{
+        res.status(400).send();
+    })
+})
+.get('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
     if(req.user._id == id){
         res.send(req.user);
@@ -183,6 +189,55 @@ app.get('/user/:id', authenticate, (req,res) =>{
 
     }).catch((err) =>{
         res.status(400).send()
+    })
+})
+.post('/user/:id/panier', authenticate, (req,res) => {
+    var body = req.body;
+    var id = req.params.id;
+    User.findById(id).then((user) =>{
+        for(var element in user.panier){
+            if(user.panier[element].nomdumatch == body.nomdumatch){
+                var exist = true;
+                break;
+            }
+        };
+    
+        if(typeof exist === 'undefined' || exist !== true){
+            user.panier.push(body);
+            User.findByIdAndUpdate(id,{$set: user}, {new: true}).then((result) =>{
+                res.status(200).send(result)
+            }).catch((err) =>{
+                res.status(400).send()
+            })   
+        }
+        else
+        {
+            res.status(403).send();
+        }
+    }).catch((e) =>{
+        console.log(e);
+        res.status(400).send(e);
+    })
+})
+.delete('/user/:id/panier', authenticate, (req, res) => {
+    var id = req.params.id;
+    User.findById(id).then((user) =>{
+        user.panier = [];
+        User.findByIdAndUpdate(id,{$set: user}, {new: true}).then((result) =>{
+            res.status(200).send(result)
+        }).catch((err) =>{
+            res.status(400).send()
+        }) 
+    })
+})
+.delete('/user/:id/panier/:match', authenticate, (req,res) =>{
+    var id = req.params.id;
+    var match = req.params.match;
+    User.findByIdAndUpdate(id,{$pull:{'panier': {'_id': match}}},{new: true}).then((user) =>{
+        res.status(200).send(user);
+    })
+    .catch((err) =>{
+        res.status(400).send();
     })
 })
 
