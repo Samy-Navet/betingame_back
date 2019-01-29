@@ -56,8 +56,14 @@ app.get('/',(req,res) =>{
     });
 })
 
-
-app.get('/user/:id', authenticate, (req,res) =>{
+app.get('/user', authenticate, (req,res) =>{
+    User.find().then((users) =>{
+        res.status(200).send(users);
+    }).catch((e) =>{
+        res.status(400).send();
+    })
+})
+.get('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
     if(req.user._id == id){
         console.log(req.user);
@@ -198,7 +204,14 @@ app.get('/user/:id', authenticate, (req,res) =>{
     })
 })
 .delete('/user/:id/panier/:match', authenticate, (req,res) =>{
+    var id = req.params.id;
+    var match = req.params.match;
+    User.find({'_id': id, 'panier._id': match}).then((user) =>{
 
+    })
+    .catch((err) =>{
+        res.status(400).send();
+    })
 })
 
 app.listen(port, function() {
