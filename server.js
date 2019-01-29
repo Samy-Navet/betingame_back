@@ -60,7 +60,6 @@ app.get('/',(req,res) =>{
 app.get('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
     if(req.user._id == id){
-        console.log(req.user);
         res.send(req.user);
     }
     else
@@ -115,9 +114,30 @@ app.get('/user/:id', authenticate, (req,res) =>{
 })
 .get('/matchs/', authenticate, (req, res) =>{
     Match.find().then((matchs) =>{
-        res.status(200).send(matchs)
+        if(matchs){
+            res.status(200).send(matchs)
+        }
+        else
+        {
+            res.status(404).send(null)
+        }
+
     }).catch((e) =>{
-        res.send(e);
+        res.status(400).send(e);
+    })
+})
+.get('/matchs/:id', authenticate, (req, res) =>{
+    var id = req.params.id;
+    Match.findById(id).then((match) =>{
+        if(match){
+            res.status(200).send(match)
+        }
+        else
+        {
+            res.status(404).send(null);
+        }
+    }).catch((e) =>{
+        res.status(400).send(e);
     })
 })
 .post('/matchs/', admin, (req, res) =>{
@@ -153,7 +173,14 @@ app.get('/user/:id', authenticate, (req,res) =>{
     var id = req.params.id
     var body = req.body
     Match.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
-        res.status(200).send()
+        if(result){
+            res.status(200).send()
+        }
+        else
+        {
+            res.status(404).send(null)  
+        }
+
     }).catch((err) =>{
         res.status(400).send()
     })
