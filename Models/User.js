@@ -52,6 +52,15 @@ var UserSchema = new mongoose.Schema({
       type : String
     }
   }],
+  paris : [{
+    typeparis: {
+      type: String,
+    },
+    matchs: [{}],
+    mise: {
+      type: Number
+    },
+  }],
   tokens: [{
     access: {
         type: String
