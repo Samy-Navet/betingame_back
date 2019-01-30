@@ -2,10 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash')
 
+// models
 var {mongoose} = require('./db/mongoose');
 var {User} = require('./Models/User');
 var {Match} = require('./Models/Match');
 
+
+const userRoute = require('./routes/userRoute');
+
+// middlewares
 var {authenticate} = require('./middleware/authenticate')
 var {admin} = require('./middleware/adminAuthenticate')
 
@@ -16,6 +21,7 @@ var app = express();
 // BodyParser
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
 
 app.get('/',(req,res) =>{
     res.send('Bienvenue sur l\' api betingame ! utilisez postman pour tester toutes les routes !')
