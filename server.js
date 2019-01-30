@@ -6,7 +6,7 @@ var {mongoose} = require('./db/mongoose');
 var {User} = require('./Models/User');
 var {Match} = require('./Models/Match');
 
-var {authenticate} = require('./middleware/authenticate')
+var authenticate = require('./middleware/authenticate')
 var {admin} = require('./middleware/adminAuthenticate')
 
 const port = process.env.PORT || 8080;
@@ -55,70 +55,43 @@ app.get('/',(req,res) =>{
         res.status(400).send();
     });
 })
-
-app.get('/user', authenticate, (req,res) =>{
+.get('/user', authenticate.authenticate, (req,res) =>{
     User.find().then((users) =>{
         res.status(200).send(users);
     }).catch((e) =>{
         res.status(400).send();
     })
 })
-.get('/user/:id', authenticate, (req,res) =>{
+.get('/user/:id', authenticate.adminOrUser, (req,res) =>{
     var id = req.params.id
-    if(req.user._id == id){
-        res.send(req.user);
-    }
-    else
-    {
-        res.status(401).send();
-    }
+    res.send(req.user);
 })
-.delete('/user/:id', authenticate, (req, res) => {
+.delete('/user/:id', authenticate.adminOrUser, (req, res) => {
     var id = req.params.id
-    if(req.user._id == id || req.user.admin == true){
-        User.deleteOne({_id: id}).then(() =>{
-            res.status(200).send();
-        }).catch((e) =>{
-            res.status(400).send(e);
-        })
-    }
-    else
-    {
-        res.status(401).send();
-    }
+    User.deleteOne({_id: id}).then(() =>{
+        res.status(200).send();
+    }).catch((e) =>{
+        res.status(400).send(e);
+    })
+    res.status(401).send();
 })
-.delete('/user/:id/logout', authenticate, (req,res) =>{
-    var id = req.params.id;
-    if(req.user._id == id){
-        req.user.removeToken(req.token).then(() =>{
-            res.status(200).send();
-        }, () =>{
-            res.status(400).send();
-        })
-    }
-    else
-    {
-        res.status(401).send();
-    }
+.delete('/user/:id/logout', authenticate.onlyUser, (req,res) =>{
+    req.user.removeToken(req.token).then(() =>{
+        res.status(200).send();
+    }, () =>{
+        res.status(400).send();
+    })  
 })
-.put('/user/:id', authenticate, (req,res) =>{
+.put('/user/:id', authenticate.adminOrUser, (req,res) =>{
     var id = req.params.id
     var body = req.body;
-
-    if(req.user._id == id || req.user.admin === true){
-        User.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
-            res.status(200).send()
-        }).catch((error) =>{
-            res.status(400).send(error)
-        })
-    }
-    else
-    {
-        res.status(401).send();
-    }
-    
+    User.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
+        res.status(200).send()
+    }).catch((error) =>{
+        res.status(400).send(error)
+    })
 })
-.get('/matchs/', authenticate, (req, res) =>{
+.get('/matchs/', authenticate.authenticate, (req, res) =>{
     Match.find().then((matchs) =>{
         if(matchs){
             res.status(200).send(matchs)
@@ -132,7 +105,7 @@ app.get('/user', authenticate, (req,res) =>{
         res.status(400).send(e);
     })
 })
-.get('/matchs/:id', authenticate, (req, res) =>{
+.get('/matchs/:id', authenticate.authenticate, (req, res) =>{
     var id = req.params.id;
     Match.findById(id).then((match) =>{
         if(match){
@@ -146,7 +119,7 @@ app.get('/user', authenticate, (req,res) =>{
         res.status(400).send(e);
     })
 })
-.post('/matchs/', admin, (req, res) =>{
+.post('/matchs/', authenticate.admin, (req, res) =>{
     var date = req.body.datematch
     var title = req.body.title
     var participants = req.body.participant
@@ -166,7 +139,7 @@ app.get('/user', authenticate, (req,res) =>{
         res.status(400).send(e);
     })
 })
-.delete('/matchs/:id', admin, (req,res) =>{
+.delete('/matchs/:id', authenticate.admin, (req,res) =>{
     var id = req.params.id;
 
      Match.deleteOne({_id: id}).then((result) =>{
@@ -175,7 +148,7 @@ app.get('/user', authenticate, (req,res) =>{
          res.status(400).send();
      })
 })
-.put('/matchs/:id', admin, (req,res) => {
+.put('/matchs/:id', authenticate.admin, (req,res) => {
     var id = req.params.id
     var body = req.body
     Match.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
@@ -191,7 +164,7 @@ app.get('/user', authenticate, (req,res) =>{
         res.status(400).send()
     })
 })
-.post('/user/:id/panier', authenticate, (req,res) => {
+.post('/user/:id/panier', authenticate.onlyUser, (req,res) => {
     var body = req.body;
     var id = req.params.id;
     User.findById(id).then((user) =>{
@@ -215,11 +188,10 @@ app.get('/user', authenticate, (req,res) =>{
             res.status(403).send();
         }
     }).catch((e) =>{
-        console.log(e);
         res.status(400).send(e);
     })
 })
-.delete('/user/:id/panier', authenticate, (req, res) => {
+.delete('/user/:id/panier', authenticate.onlyUser, (req, res) => {
     var id = req.params.id;
     User.findById(id).then((user) =>{
         user.panier = [];
@@ -230,7 +202,7 @@ app.get('/user', authenticate, (req,res) =>{
         }) 
     })
 })
-.delete('/user/:id/panier/:match', authenticate, (req,res) =>{
+.delete('/user/:id/panier/:match', authenticate.onlyUser, (req,res) =>{
     var id = req.params.id;
     var match = req.params.match;
     User.findByIdAndUpdate(id,{$pull:{'panier': {'_id': match}}},{new: true}).then((user) =>{
