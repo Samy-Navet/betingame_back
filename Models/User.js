@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var UserSchema = new mongoose.Schema({
   username: {

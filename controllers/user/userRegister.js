@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const userRegister = (req, res) =>{
     var username = req.body.username
     var password = req.body.password
@@ -21,4 +23,4 @@ const userRegister = (req, res) =>{
     })
 };
 
-module.exports = {userRegister};
+module.exports = userRegister;

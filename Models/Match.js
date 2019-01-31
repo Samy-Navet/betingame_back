@@ -4,7 +4,6 @@ const validator = require('validator');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var MatchSchema = new mongoose.Schema({
     dates: {

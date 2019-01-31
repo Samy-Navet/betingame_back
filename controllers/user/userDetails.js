@@ -1,3 +1,4 @@
+var {User} = require('./../../Models/User');
 const userDetails = (req,res) =>{
     var id = req.params.id
     if(req.user._id == id){

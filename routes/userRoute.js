@@ -1,20 +1,24 @@
-const express = require('express');
+const authenticate = require('./../middleware/authenticate');
 const userList = require('./../controllers/user/userList');
-console.log(userList);
-var app = express();
+const userRegister = require('./../controllers/user/userRegister');
+const userDetails = require('./../controllers/user/userDetails');
 
-app.route('/user')
+
+module.exports = (app) =>{
+    app.route('/user')
     .get(userList)
     .post(userRegister);
 
 app.route('/user/:id')
-    .get(userDetails)
-    .put(updateUser)
-    .delete(userDelete)
+    .get(authenticate, userDetails)
+    .put(authenticate, updateUser)
+    .delete(authenticate, userDelete)
 
-app.route('/user/login')
-    .post(userLogin)
+// app.route('/user/login')
+//     .post(userLogin)
 
-app.route('/user/:id/logout')
-    .delete(userLogout)
+// app.route('/user/:id/logout')
+//     .delete(userLogout)
+
+}
 
