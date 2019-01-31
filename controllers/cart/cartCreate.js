@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const cartCreate = (req,res) => {
     var body = req.body;
     var id = req.params.id;

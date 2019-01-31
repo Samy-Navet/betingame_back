@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const cartDeleteAll = (req, res) => {
     var id = req.params.id;
     User.findById(id).then((user) =>{

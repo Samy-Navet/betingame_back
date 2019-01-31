@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const cartDeleteMatch = (req,res) =>{
     var id = req.params.id;
     var match = req.params.match;
