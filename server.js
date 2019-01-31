@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash')
 
-// models
+// config db
 var {mongoose} = require('./db/mongoose');
-// var {User} = require('./Models/User');
-var {Match} = require('./Models/Match');
 
+// routes
 var router = express.Router();
 const userRoute = require('./routes/userRoute');
+const matchRoute = require('./routes/matchRoute');
 
 // middlewares
 var {authenticate} = require('./middleware/authenticate')
@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 userRoute(app);
+matchRoute(app);
 // app.get('/',(req,res) =>{
 //     res.send('Bienvenue sur l\' api betingame ! utilisez postman pour tester toutes les routes !')
 // })

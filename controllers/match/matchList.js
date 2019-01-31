@@ -1,3 +1,4 @@
+var {Match} = require('./../../Models/Match');
 const matchList = (req, res) =>{
     Match.find().then((matchs) =>{
         if(matchs){

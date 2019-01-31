@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const userLogout = (req,res) =>{
     var id = req.params.id;
     if(req.user._id == id){
@@ -13,4 +15,4 @@ const userLogout = (req,res) =>{
     }
 }
 
-module.exports = {userLogout};
+module.exports = userLogout;

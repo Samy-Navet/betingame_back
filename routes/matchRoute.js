@@ -1,19 +1,21 @@
-const express = require('express');
-const userList = require('./../controllers/match/matchList');
-var app = express();
+const authenticate = require('./../middleware/authenticate');
+const admin = require('./../middleware/adminAuthenticate');
+const matchList = require('./../controllers/match/matchList');
+const matchDetails = require('./../controllers/match/matchDetails');
+const matchCreate = require('./../controllers/match/matchCreate');
+const matchUpdate = require('./../controllers/match/matchUpdate');
+const matchDelete = require('./../controllers/match/matchDelete');
 
-app.route('/match')
-    .get(userList)
-//     .post(userRegister);
 
-// app.route('/match/:id')
-//     .get(userDetails)
-//     .put(updateUser)
-//     .delete(userDelete)
 
-// app.route('/match/login')
-//     .post(userLogin)
+module.exports = (app) => {
+    app.route('/match')
+    .get(authenticate, matchList)
+    .post(admin, matchCreate);
 
-// app.route('/match/:id/logout')
-//     .delete(userLogout)
+app.route('/match/:id')
+    .get(authenticate, matchDetails)
+    .put(admin, matchUpdate)
+    .delete(admin, matchDelete)
+}
 

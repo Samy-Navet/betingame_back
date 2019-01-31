@@ -1,3 +1,5 @@
+var {Match} = require('./../../Models/Match');
+
 const matchDetails = (req, res) =>{
     var id = req.params.id;
     Match.findById(id).then((match) =>{

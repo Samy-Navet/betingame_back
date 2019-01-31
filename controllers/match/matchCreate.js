@@ -1,3 +1,4 @@
+var {Match} = require('./../../Models/Match');
 const matchCreate = (req, res) =>{
     var date = req.body.datematch
     var title = req.body.title

@@ -1,3 +1,5 @@
+var {Match} = require('./../../Models/Match');
+
 const matchUpdate = (req,res) => {
     var id = req.params.id
     var body = req.body
@@ -7,7 +9,7 @@ const matchUpdate = (req,res) => {
         }
         else
         {
-            res.status(404).send(null)  
+            res.status(404).send()  
         }
 
     }).catch((err) =>{
@@ -15,4 +17,4 @@ const matchUpdate = (req,res) => {
     })
 };
 
-module.exports = matchUpdate
+module.exports = matchUpdate;

@@ -1,3 +1,5 @@
+var {Match} = require('./../../Models/Match');
+
 const matchDelete = (req,res) =>{
     var id = req.params.id;
 

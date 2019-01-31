@@ -1,3 +1,5 @@
+var {User} = require('./../../Models/User');
+
 const userDelete = (req, res) => {
     var id = req.params.id
     if(req.user._id == id || req.user.admin == true){
@@ -13,4 +15,4 @@ const userDelete = (req, res) => {
     }
 }
 
-module.exports = {userDelete};
+module.exports = userDelete;
