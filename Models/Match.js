@@ -25,11 +25,6 @@ var MatchSchema = new mongoose.Schema({
         default: null
     },
     participant: [{
-        // _participant: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     required: true,
-        //     unique: true
-        // },
         participantnom: {
             type: String
         },

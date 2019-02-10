@@ -1,9 +1,9 @@
-var {User} = require('./../../Models/User');
+var {Cart} = require('./../../Models/Cart');
 
 const cartDeleteMatch = (req,res) =>{
     var id = req.params.id;
     var match = req.params.match;
-    User.findByIdAndUpdate(id,{$pull:{'panier': {'_id': match}}},{new: true}).then((user) =>{
+    Cart.findOneAndUpdate({userid : id},{$pull:{'matchs': {'matchid': match}}},{new: true}).then((user) =>{
         res.status(200).send(user);
     })
     .catch((err) =>{
