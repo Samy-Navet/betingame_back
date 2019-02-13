@@ -4,7 +4,6 @@ const validator = require('validator');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var MatchSchema = new mongoose.Schema({
     dates: {
@@ -26,11 +25,6 @@ var MatchSchema = new mongoose.Schema({
         default: null
     },
     participant: [{
-        // _participant: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     required: true,
-        //     unique: true
-        // },
         participantnom: {
             type: String
         },
