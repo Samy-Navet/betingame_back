@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var UserSchema = new mongoose.Schema({
   username: {
@@ -38,20 +37,6 @@ var UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  panier: [{
-    nomdumatch : {
-      type : String
-    },
-    participant : {
-      type : String
-    },
-    coteParticipant: {
-      type : Number
-    },
-    logoUrl : {
-      type : String
-    }
-  }],
   tokens: [{
     access: {
         type: String
@@ -67,7 +52,7 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','panier']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
@@ -137,7 +122,7 @@ UserSchema.statics.findByCredentials = function (username, password) {
 UserSchema.methods.removeToken = function (token) {
   var user = this;
 
-  return user.update({
+  return user.updateOne({
     $pull: {
       tokens: {token}
     }

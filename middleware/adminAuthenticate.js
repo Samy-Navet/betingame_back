@@ -18,4 +18,4 @@ var admin = (req, res, next) => {
     })
 }
 
-module.exports = {admin};
+module.exports = admin;
