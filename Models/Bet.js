@@ -26,6 +26,11 @@ var betSchema = new mongoose.Schema({
         required: true
     },
 
+    cotetotal : {
+        type : Number,
+        required : true
+    },
+
     status : {
         type : Number,
         required: true

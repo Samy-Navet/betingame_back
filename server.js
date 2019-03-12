@@ -10,6 +10,7 @@ var router = express.Router();
 const userRoute = require('./routes/userRoute');
 const matchRoute = require('./routes/matchRoute');
 const cartRoute = require('./routes/cartRoute');
+const betRoute = require('./routes/betRoute');
 
 // middlewares
 var {authenticate} = require('./middleware/authenticate')
@@ -26,6 +27,7 @@ app.use(bodyParser.json())
 userRoute(app);
 matchRoute(app);
 cartRoute(app);
+betRoute(app);
 
 app.listen(port, function() {
     console.log('Server en écoute :) port '+port);
