@@ -1,6 +1,6 @@
 var {Match} = require('./../../Models/Match');
 const matchList = (req, res) =>{
-    Match.find().then((matchs) =>{
+    Match.find().select('-__v').then((matchs) =>{
         if(matchs){
             res.status(200).send(matchs)
         }
