@@ -9,7 +9,8 @@ const userRegister = (req, res) =>{
     var user = new User({
         username: username,
         email: email,
-        password: password
+        password: password,
+        money: 500
     });
     if(admin != null){
         user.admin = admin
