@@ -38,29 +38,39 @@ var UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  panier: [{
-    nomdumatch : {
-      type : String
-    },
-    participant : {
-      type : String
-    },
-    coteParticipant: {
-      type : Number
-    },
-    logoUrl : {
-      type : String
-    }
-  }],
-  paris : [{
-    typeparis: {
-      type: String,
-    },
-    matchs: [{}],
-    mise: {
-      type: Number
-    },
-  }],
+  money: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  score: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  // panier: [{
+  //   nomdumatch : {
+  //     type : String
+  //   },
+  //   participant : {
+  //     type : String
+  //   },
+  //   coteParticipant: {
+  //     type : Number
+  //   },
+  //   logoUrl : {
+  //     type : String
+  //   }
+  // }],
+  // paris : [{
+  //   typeparis: {
+  //     type: String,
+  //   },
+  //   matchs: [{}],
+  //   mise: {
+  //     type: Number
+  //   },
+  // }],
   tokens: [{
     access: {
         type: String
