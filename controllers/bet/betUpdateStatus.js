@@ -33,12 +33,11 @@ const betUpdateStatus = (req,res) => {
                 if(endedMatchNumber === matchNumber && matchSuccess === matchNumber){
                     // update status ended + give credit
                     // modifier user model before this !!
-                    // Bet.updateOne({_id: betid}, {$set : {status: 2}}).then((result)=>{
-                    //     User.findOneAndUpdate({_id: userid},{money : bet.cotetotale * bet.bet, score : bet.cotetotale * bet.bet}).then((user)=>{
-                    //         res.status(200).send();
-                    //     })
-                    // })
-                    console.log('in');
+                    Bet.updateOne({_id: betid}, {$set : {status: 2}}).then((result)=>{
+                        User.findOneAndUpdate({_id: userid},{$inc :{money : (bet.cotetotale * bet.bet), score : (bet.cotetotale * bet.bet)}}).then((user)=>{
+                            res.status(200).send();
+                        })
+                    })
                 }
                 else if(endedMatchNumber === matchNumber){
                     // update status ended

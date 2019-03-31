@@ -1,6 +1,7 @@
 var {Bet} = require('./../../Models/Bet');
 var {Match} = require('./../../Models/Match');
 var {Cart} = require('./../../Models/Cart');
+var {User} = require('./../../Models/User');
 
 const betCreate = (req,res) => {
     var body = req.body;
@@ -31,7 +32,9 @@ const betCreate = (req,res) => {
         if(coteTotale > 0 ){
             newBet.cotetotale = coteTotale;
             newBet.save().then(() =>{
-                // VIDAGE DU PANIER
+                // I/ deduction de l'argent
+                User.findByIdAndUpdate(id, {$inc: {money: -body.bet}})
+                //II/ VIDAGE DU PANIER
                 res.status(200).send(newBet);
             }).catch(() =>{
                 res.status(400).send('not saved');
