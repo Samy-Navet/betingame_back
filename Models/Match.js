@@ -6,6 +6,9 @@ const _ = require('lodash')
 mongoose.Promise = global.Promise;
 
 var MatchSchema = new mongoose.Schema({
+    api_match_id : {
+        type : Number
+    },
     dates: {
         time: { 
             type : Date,
@@ -24,12 +27,29 @@ var MatchSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+
+    state : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    winner : {
+        type : String 
+    },
     participant: [{
+        participant_api_id : {
+            type : Number
+        },
         participantnom: {
             type: String
         },
         coteparticipant: {
             type: Number
+        },
+        score: {
+            type: Number,
+            required: true,
+            default : 0
         }
     }]
 }, {collection: 'match'});
