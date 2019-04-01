@@ -6,7 +6,7 @@ var {User} = require('./../../Models/User');
 const betCreate = (req,res) => {
     var body = req.body;
     var id = req.params.id;
-    // console.log(body.matchs);
+
     var newBet = new Bet({
         userid : id,
         matchs : body.matchs,
@@ -20,7 +20,6 @@ const betCreate = (req,res) => {
     for(var i = 0; i < matchs.length; i++){
         promises.push(new Promise((resolve, reject) =>{
             Match.findOne({ _id : matchs[i].matchid},{"participant" : {$elemMatch : {_id : matchs[i].participantchoice}}}).then((matchDetails) =>{
-                console.log('match found');
                 coteTotale += matchDetails.participant[0].coteparticipant;
                 matchToRemoveFromCart.push(matchDetails._id);
                 resolve(coteTotale);
@@ -33,19 +32,33 @@ const betCreate = (req,res) => {
     Promise.all(promises).then(()=>{
         if(coteTotale > 0 ){
             newBet.cotetotale = coteTotale;
-            newBet.save().then(() =>{
-                // I/ deduction de l'argent
-                // II/ VIDAGE DU PANIER
-                console.log(body.bet);
-                User.findByIdAndUpdate(id, {$inc: {money: -body.bet}}, {new: true}).then((user) =>{
-                    res.send(user);
-                    // Cart.findOneAndUpdate({userid: id}, {$unset: {  "matches" : { $elemMatch: { "matchid" : {$in : matchToRemoveFromCart } } } } }).then(() =>{
-                    //     res.status(200).send(newBet);
-                    // })
-                })                
-            }).catch(() =>{
-                res.status(400).send('not saved');
-            })
+            User.findOne({_id: id}).then((user) =>{
+                if(user){
+                    // verification si assez de monnaie
+                    if(user.money - body.bet >= 0){
+
+                        newBet.save().then(() =>{
+                            // I/ deduction de l'argent
+                            user.update({$inc: {money: -body.bet}}, {new: true}).then(()=>{
+                                // II/ VIDAGE DU PANIER
+                                Cart.findOneAndUpdate({userid: id}, {$pull: {  "matchs" : { "matchid" : {$in : matchToRemoveFromCart } } } }, {new : true}).then((cart) =>{
+                                    res.status(200).send(newBet);
+                                }) 
+                            })              
+                        }).catch(() =>{
+                            res.status(400).send({'error':'not saved'});
+                        })
+                    }
+                    else
+                    {
+                        res.send({'error':'not enough money'});
+                    }
+                }
+                else
+                {
+                    res.send({'error':'no user found'});
+                }
+            })  
         }
     }).catch((promisesErr)=>{
         res.send(promisesErr);
