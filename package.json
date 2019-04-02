@@ -25,7 +25,7 @@
   },
   "apidoc": {
     "title": "BetInGame documentation",
-    "url" : "https://betingame.herokuapp.com/doc/index.html"
+    "url" : "https://betingame.herokuapp.com"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
