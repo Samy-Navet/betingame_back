@@ -62,10 +62,7 @@ beforeEach(function() {
             user.admin = admin
         }
 
-        user.save(function(err) {
-            if (err) done(err);
-            else done();
-        });
+        user.save(done);
     });
 });
 
