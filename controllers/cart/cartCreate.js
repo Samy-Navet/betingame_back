@@ -1,3 +1,34 @@
+/**
+ * @api {post} /match/ create a match
+ * @apiName matchCreate
+ * @apiGroup Cart
+ *
+ * @apiParam {String} matchid id of the match.
+ * @apiParam {String} participantchoice id of the participant.
+ * 
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *           "matchid": "5c373bd0cde84e428ce07d3d",
+ *           "participantchoice": "5c373bd0cde84e428ce07d3e"
+ *       }
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+ *           "_id": "5c607c56bb6b8e24f86f1c7a",
+ *           "userid": "5c3720c1bcdf441cb4375fc7",
+ *           "matchs": [
+ *               {
+ *                   "_id": "5ca61cc8c535b7034ce815b2",
+ *                   "matchid": "5c373bd0cde84e428ce07d3d",
+ *                   "participantchoice": "5c373bd0cde84e428ce07d3e"
+ *               }
+ *           ],
+ *       }
+ * 
+ *
+ */
 var {Cart} = require('./../../Models/Cart');
 
 const cartCreate = (req,res) => {

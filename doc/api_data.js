@@ -1,10 +1,154 @@
 define({ "api": [
   {
+    "type": "delete",
+    "url": "/user/:userid/cart/:matchid",
+    "title": "delete all matchs from the cart",
+    "name": "cartDeleteAll",
+    "group": "Cart",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>User unique token, user or admin token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n          \"_id\": \"5c607c56bb6b8e24f86f1c7a\",\n          \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n          \"matchs\": [],\n          \"__v\": 0\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/cart/cartDeleteAll.js",
+    "groupTitle": "Cart"
+  },
+  {
+    "type": "delete",
+    "url": "/user/:userid/cart/:matchid",
+    "title": "delete a match from the cart",
+    "name": "cartDeleteMatch",
+    "group": "Cart",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>User unique token, user or admin token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    HTTP/1.1 200 OK\n{\n          \"_id\": \"5c607c56bb6b8e24f86f1c7a\",\n          \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n          \"matchs\": [],\n          \"__v\": 0\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/cart/cartDeleteMatch.js",
+    "groupTitle": "Cart"
+  },
+  {
+    "type": "post",
+    "url": "/match/",
+    "title": "create a match",
+    "name": "matchCreate",
+    "group": "Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "matchid",
+            "description": "<p>id of the match.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "participantchoice",
+            "description": "<p>id of the participant.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n      \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n      \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n      \"_id\": \"5c607c56bb6b8e24f86f1c7a\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca61cc8c535b7034ce815b2\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/cart/cartCreate.js",
+    "groupTitle": "Cart"
+  },
+  {
     "type": "post",
     "url": "/match/",
     "title": "create a match",
     "name": "matchCreate",
     "group": "Match",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>User unique token, ONLY admin token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [

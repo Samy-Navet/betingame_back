@@ -3,6 +3,13 @@
  * @apiName matchCreate
  * @apiGroup Match
  *
+ * @apiHeader {String} x-auth User unique token, ONLY admin token.
+ * 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA"
+ *     }
+ * 
  * @apiParam {String} title match title.
  * @apiParam {String} game game name.
  * @apiParam {Date} datematch Date("<YYYY-mm-ddTHH:MM:ss>") of the beginning of the match.
