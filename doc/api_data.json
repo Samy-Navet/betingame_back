@@ -433,6 +433,121 @@
     "groupTitle": "Match"
   },
   {
+    "type": "put",
+    "url": "/match/:id",
+    "title": "update match score and status",
+    "name": "matchUpdateScore",
+    "group": "Match",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>unique token, ONLY admin token</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n      \"state\" : 2,\n      \"participant\" : [3,0],\n      \"winner\" : \"5c530a65b328b6280cd4d1b0\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>match title.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "game",
+            "description": "<p>game name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "matchdate",
+            "description": "<p>Date(&quot;<a href=\"YYYY-mm-ddTHH:MM:ss\">YYYY-mm-ddTHH:MM:ss</a>&quot;) of the beginning of the match.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "time",
+            "description": "<p>Date(&quot;<a href=\"YYYY-mm-ddTHH:MM:ss\">YYYY-mm-ddTHH:MM:ss</a>&quot;) of the creation of the match in the database.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "state",
+            "description": "<p>state of the match : 0 =&gt; créé, 1=&gt; en cours, 2 =&gt; terminé.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "winner",
+            "description": "<p>_id of the participant that won (participant[x]._id), null if the match is not ended.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "score",
+            "description": "<p>score of the participant (participant[x].score), 0 by default.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "participantnom",
+            "description": "<p>name of the participant (participant[x].participantnom)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "participantcote",
+            "description": "<p>betting odds of the participant (participant[x].participantcote)</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n      \"dates\": {\n          \"matchdate\": \"2018-11-03T05:30:00.000Z\",\n          \"time\": \"2019-01-10T12:34:24.576Z\"\n      },\n      \"game\": \"League of Legends\",\n      \"state\": 2,\n      \"_id\": \"5c373bd0cde84e428ce07d3d\",\n      \"title\": \"FNC VS IG\",\n      \"participant\": [\n          {\n              \"score\": 0,\n              \"_id\": \"5c373bd0cde84e428ce07d3f\",\n              \"participantnom\": \"Fnatic\",\n              \"coteparticipant\": 2.5\n          },\n          {\n              \"score\": 3,\n              \"_id\": \"5c373bd0cde84e428ce07d3e\",\n              \"participantnom\": \"Invictus Gaming\",\n              \"coteparticipant\": 1.5\n          }\n      ],\n      \"winner\": \"5c373bd0cde84e428ce07d3e\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/match/matchUpdateScore.js",
+    "groupTitle": "Match"
+  },
+  {
     "type": "get",
     "url": "/user/:id",
     "title": "request user information",
