@@ -1,7 +1,197 @@
 define({ "api": [
   {
+    "type": "post",
+    "url": "/user/:id/bet/",
+    "title": "create a bet",
+    "name": "betCreate",
+    "group": "Bet",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>User unique token, user token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "matchs",
+            "description": "<p>that are in the cart.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "bet",
+            "description": "<p>bet of the user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n      \"matchs\" : [ \n          {\n              \"matchid\" : \"5c530a65b328b6280cd4d1ae\",\n              \"participantchoice\" : \"5c530a65b328b6280cd4d1b0\"\n          },\n          {\n              \"matchid\" : \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\" : \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n      \"bet\" : 50\n      \n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n      \"_id\": \"5ca70546c5b2eb31fc57330c\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330e\",\n              \"matchid\": \"5c530a65b328b6280cd4d1ae\",\n              \"participantchoice\": \"5c530a65b328b6280cd4d1b0\"\n          },\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330d\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n      \"bet\": 50,\n      \"status\": 0,\n      \"cotetotale\": 2.52,\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/bet/betCreate.js",
+    "groupTitle": "Bet"
+  },
+  {
+    "type": "get",
+    "url": "/user/:id/bet/:betid",
+    "title": "get the bet details",
+    "name": "betDetails",
+    "group": "Bet",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>Users unique token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n      \"_id\": \"5ca70546c5b2eb31fc57330c\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330e\",\n              \"matchid\": \"5c530a65b328b6280cd4d1ae\",\n              \"participantchoice\": \"5c530a65b328b6280cd4d1b0\"\n          },\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330d\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n      \"bet\": 50,\n      \"status\": 0,\n      \"cotetotale\": 2.52,\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/bet/betDetails.js",
+    "groupTitle": "Bet"
+  },
+  {
+    "type": "get",
+    "url": "/user/:id/bet/",
+    "title": "get the bet list",
+    "name": "betList",
+    "group": "Bet",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>Users unique token.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [{\n      \"_id\": \"5ca70546c5b2eb31fc57330c\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330e\",\n              \"matchid\": \"5c530a65b328b6280cd4d1ae\",\n              \"participantchoice\": \"5c530a65b328b6280cd4d1b0\"\n          },\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330d\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n      \"bet\": 50,\n      \"status\": 0,\n      \"cotetotale\": 2.52,\n  }]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/bet/betsList.js",
+    "groupTitle": "Bet"
+  },
+  {
+    "type": "post",
+    "url": "/match/",
+    "title": "put a match in the cart",
+    "name": "cartCreate",
+    "group": "Cart",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "matchid",
+            "description": "<p>id of the match.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "participantchoice",
+            "description": "<p>id of the participant.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n      \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n      \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n {\n      \"_id\": \"5c607c56bb6b8e24f86f1c7a\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca61cc8c535b7034ce815b2\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/cart/cartCreate.js",
+    "groupTitle": "Cart"
+  },
+  {
     "type": "delete",
-    "url": "/user/:userid/cart/:matchid",
+    "url": "/user/:userid/cart/",
     "title": "delete all matchs from the cart",
     "name": "cartDeleteAll",
     "group": "Cart",
@@ -75,52 +265,6 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "controllers/cart/cartDeleteMatch.js",
-    "groupTitle": "Cart"
-  },
-  {
-    "type": "post",
-    "url": "/match/",
-    "title": "create a match",
-    "name": "matchCreate",
-    "group": "Cart",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "matchid",
-            "description": "<p>id of the match.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "participantchoice",
-            "description": "<p>id of the participant.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n      \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n      \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n {\n      \"_id\": \"5c607c56bb6b8e24f86f1c7a\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca61cc8c535b7034ce815b2\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "controllers/cart/cartCreate.js",
     "groupTitle": "Cart"
   },
   {
@@ -603,6 +747,31 @@ define({ "api": [
       ]
     },
     "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "state",
+            "description": "<p>state of the match : 0 =&gt; not started, 1=&gt; in progress, 2 =&gt; ended.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "winner",
+            "description": "<p>participant id of the winner, null if match in progress.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number[]",
+            "optional": false,
+            "field": "array",
+            "description": "<p>containing the participants scores, first item is the first participant and second item the second participant.</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "Request-Example:",

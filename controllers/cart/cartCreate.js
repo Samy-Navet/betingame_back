@@ -1,6 +1,6 @@
 /**
- * @api {post} /match/ create a match
- * @apiName matchCreate
+ * @api {post} /match/ put a match in the cart
+ * @apiName cartCreate
  * @apiGroup Cart
  *
  * @apiParam {String} matchid id of the match.

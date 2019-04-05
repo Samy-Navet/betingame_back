@@ -9,9 +9,9 @@
  *       "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM"
  *     }
  * 
- * @apiParams {Number} state state of the match : 0 => not started, 1=> in progress, 2 => ended.
- * @apiParams {String} winner participant id of the winner, null if match in progress.
- * @apiParams {Number[]} array containing the participants scores, first item is the first participant and second item the second participant.
+ * @apiParam {Number} state state of the match : 0 => not started, 1=> in progress, 2 => ended.
+ * @apiParam {String} winner participant id of the winner, null if match in progress.
+ * @apiParam {Number[]} array containing the participants scores, first item is the first participant and second item the second participant.
  * 
  * 
  *  @apiParamExample {json} Request-Example:

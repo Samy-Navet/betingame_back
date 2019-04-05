@@ -1,5 +1,5 @@
 /**
- * @api {delete} /user/:userid/cart/:matchid delete all matchs from the cart
+ * @api {delete} /user/:userid/cart/ delete all matchs from the cart
  * @apiName cartDeleteAll
  * @apiGroup Cart
  *
