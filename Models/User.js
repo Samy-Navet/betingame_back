@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var UserSchema = new mongoose.Schema({
   username: {
@@ -34,10 +33,21 @@ var UserSchema = new mongoose.Schema({
       message: props => `${props.value} is not a valid email address!`
     }
   },
+  money: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  score: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   admin: {
     type: Boolean,
     default: false
   },
+<<<<<<< HEAD
   money: {
     type: Number,
     required: true,
@@ -71,6 +81,8 @@ var UserSchema = new mongoose.Schema({
   //     type: Number
   //   },
   // }],
+=======
+>>>>>>> developpement
   tokens: [{
     access: {
         type: String
@@ -86,7 +98,7 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','panier']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','money']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
@@ -118,20 +130,20 @@ UserSchema.statics.findByToken = function(token){
   }); 
 }
 
-UserSchema.pre('save', function (next) {
-  var user = this;
+// UserSchema.pre('save', function (next) {
+//   var user = this;
 
-  if (user.isModified('password')) {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(user.password, salt, (err, hash) => {
-        user.password = hash;
-        next();
-      });
-    });
-  } else {
-    next();
-  }
-});
+//   if (user.isModified('password')) {
+//     bcrypt.genSalt(10, (err, salt) => {
+//       bcrypt.hash(user.password, salt, (err, hash) => {
+//         user.password = hash;
+//         next();
+//       });
+//     });
+//   } else {
+//     next();
+//   }
+// });
 
 UserSchema.statics.findByCredentials = function (username, password) {
   var User = this;
@@ -139,24 +151,30 @@ UserSchema.statics.findByCredentials = function (username, password) {
     if (!user) {
       return Promise.reject();
     }
-
-    return new Promise((resolve, reject) => {
-      // Use bcrypt.compare to compare password and user.password
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
+    else
+    {
+      return new Promise((resolve, reject) =>{
           resolve(user);
-        } else {
-          reject();
-        }
-      });
-    });
+      })
+    }
+
+    // return new Promise((resolve, reject) => {
+    //   // Use bcrypt.compare to compare password and user.password
+    //   bcrypt.compare(password, user.password, (err, res) => {
+    //     if (res) {
+    //       resolve(user);
+    //     } else {
+    //       reject();
+    //     }
+    //   });
+    // });
   });
 };
 
 UserSchema.methods.removeToken = function (token) {
   var user = this;
 
-  return user.update({
+  return user.updateOne({
     $pull: {
       tokens: {token}
     }

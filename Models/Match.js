@@ -4,9 +4,11 @@ const validator = require('validator');
 const _ = require('lodash')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/betingame');
 
 var MatchSchema = new mongoose.Schema({
+    api_match_id : {
+        type : Number
+    },
     dates: {
         time: { 
             type : Date,
@@ -25,17 +27,29 @@ var MatchSchema = new mongoose.Schema({
         type: String,
         default: null
     },
+
+    state : {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    winner : {
+        type : String 
+    },
     participant: [{
-        // _participant: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     required: true,
-        //     unique: true
-        // },
+        participant_api_id : {
+            type : Number
+        },
         participantnom: {
             type: String
         },
         coteparticipant: {
             type: Number
+        },
+        score: {
+            type: Number,
+            required: true,
+            default : 0
         }
     }]
 }, {collection: 'match'});
