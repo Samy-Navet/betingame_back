@@ -62,7 +62,7 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','money']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
@@ -111,7 +111,7 @@ UserSchema.statics.findByToken = function(token){
 
 UserSchema.statics.findByCredentials = function (username, password) {
   var User = this;
-  return User.findOne({username}).then((user) => {
+  return User.findOne({$or : [{'username': username},{'email': username}]}).then((user) => {
     if (!user) {
       return Promise.reject();
     }
@@ -120,18 +120,18 @@ UserSchema.statics.findByCredentials = function (username, password) {
       return new Promise((resolve, reject) =>{
           resolve(user);
       })
-    }
 
-    // return new Promise((resolve, reject) => {
-    //   // Use bcrypt.compare to compare password and user.password
-    //   bcrypt.compare(password, user.password, (err, res) => {
-    //     if (res) {
-    //       resolve(user);
-    //     } else {
-    //       reject();
-    //     }
-    //   });
-    // });
+      // return new Promise((resolve, reject) => {
+      // // Use bcrypt.compare to compare password and user.password
+      //   bcrypt.compare(password, user.password, (err, res) => {
+      //     if (res) {
+      //       resolve(user);
+      //     } else {
+      //       reject();
+      //     }
+      //   });
+      // });
+    }
   });
 };
 
@@ -156,13 +156,5 @@ UserSchema.statics.getMails = function () {
 
 var User = mongoose.model('user', UserSchema);
 
-// var nvUser = new User({username: "toto", password: "tata", email: "tutu", admin: true});
-// nvUser.save().then((succes) => {
-//     console.log(succes)
-// }, (err) =>{
-//     console.log(err)
-// })
-
-// User.getMails();
 
 module.exports = {User}
