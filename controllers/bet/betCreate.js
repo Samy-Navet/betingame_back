@@ -1,3 +1,58 @@
+/**
+ * @api {post} /user/:id/bet/ create a bet
+ * @apiName betCreate
+ * @apiGroup Bet
+ *
+ * @apiHeader {String} x-auth User unique token, user token.
+ * 
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA"
+ *     }
+ * 
+ * @apiParam {Object[]} matchs that are in the cart.
+ * @apiParam {Number} bet bet of the user.
+ * 
+ * @apiParamExample {json} Request-Example:
+ *     {
+ *           "matchs" : [ 
+ *               {
+ *                   "matchid" : "5c530a65b328b6280cd4d1ae",
+ *                   "participantchoice" : "5c530a65b328b6280cd4d1b0"
+ *               },
+ *               {
+ *                   "matchid" : "5c373bd0cde84e428ce07d3d",
+ *                   "participantchoice" : "5c373bd0cde84e428ce07d3e"
+ *               }
+ *           ],
+ *           "bet" : 50
+ *           
+ *       }
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *      {
+ *           "_id": "5ca70546c5b2eb31fc57330c",
+ *           "userid": "5c3720c1bcdf441cb4375fc7",
+ *           "matchs": [
+ *               {
+ *                   "_id": "5ca70546c5b2eb31fc57330e",
+ *                   "matchid": "5c530a65b328b6280cd4d1ae",
+ *                   "participantchoice": "5c530a65b328b6280cd4d1b0"
+ *               },
+ *               {
+ *                   "_id": "5ca70546c5b2eb31fc57330d",
+ *                   "matchid": "5c373bd0cde84e428ce07d3d",
+ *                   "participantchoice": "5c373bd0cde84e428ce07d3e"
+ *               }
+ *           ],
+ *           "bet": 50,
+ *           "status": 0,
+ *           "cotetotale": 2.52,
+ *       }
+ *
+ */
 var {Bet} = require('./../../Models/Bet');
 var {Match} = require('./../../Models/Match');
 var {Cart} = require('./../../Models/Cart');
