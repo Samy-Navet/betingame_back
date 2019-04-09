@@ -40,7 +40,7 @@ const userLogin = (req,res) =>{
           res.header('x-auth', data.token).send(data.user);
         });
     }).catch((e) => {
-        res.status(400).send();
+        res.status(401).send();
     });
 };
 
