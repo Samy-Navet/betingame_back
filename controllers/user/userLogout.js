@@ -5,8 +5,8 @@ const userLogout = (req,res) =>{
     if(req.user._id == id){
         req.user.removeToken(req.token).then(() =>{
             res.status(200).send();
-        }, () =>{
-            res.status(400).send();
+        }, (e) =>{
+            res.status(400).send(e);
         })
     }
     else
