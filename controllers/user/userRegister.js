@@ -31,6 +31,8 @@
  *
  */
 var {User} = require('./../../Models/User');
+var {Rank} = require('./../../models/Rank');
+
 
 const userRegister = (req, res) =>{
     var username = req.body.username
@@ -50,7 +52,15 @@ const userRegister = (req, res) =>{
     user.save().then(() =>{
         return user.generateAuthToken()
     }).then((data) =>{
-        res.header('x-auth', data.token).send(user);
+        // console.log(user);
+        
+        var userRank = new Rank({
+            userid: user._id
+        })
+        // creation des data rank
+        userRank.save().then(()=>{
+            res.header('x-auth', data.token).send(user);
+        })
     }).catch((e) => {
         res.status(500).send(e);
     })
