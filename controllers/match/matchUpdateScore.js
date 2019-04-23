@@ -62,11 +62,11 @@
  *
  */
 var {Match} = require('./../../Models/Match');
+var betUpdate = require('./../bet/betUpdateStatus');
 
 const matchUpdateScore = (req,res) => {
     var id = req.params.id
     var body = req.body
-    console.log('in');
     Match.findOne({_id : id}).lean().then((match) =>{
         if(match){
             if(match.api_match_id){
@@ -81,6 +81,8 @@ const matchUpdateScore = (req,res) => {
                 // res.send(match);
                 Match.updateOne({_id : id}, {$set: match}, {new: true}).then((result)=>{
                     res.status(200).send(match);
+                    betUpdate.updateBetsAfterMatch(id);
+
                 }).catch((updateErr)=>{
                     res.status(500).send(updateErr);
                 })

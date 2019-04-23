@@ -47,14 +47,9 @@ var UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  tokens: [{
-    access: {
-        type: String
-    },
-    token: {
-     type: String
-    }
-  }]
+  token: {
+    type:String
+  }
 }, {collection: 'user'});
 
 UserSchema.methods.toJSON = function () {
@@ -62,15 +57,14 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens','money']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','money']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
-  var access = 'auth';
-  var token = jwt.sign({_id: user._id.toHexString(), access}, 'Monkey D Luffy').toString();
+  var token = jwt.sign({_id: user._id.toHexString()}, 'Monkey D Luffy').toString();
 
- user.tokens =  user.tokens.concat([{access, token}]);
+  user.token =  token;
 
   return user.save().then(() => {
     return {user, token};
@@ -80,7 +74,7 @@ UserSchema.methods.generateAuthToken = function () {
 UserSchema.statics.findByToken = function(token){
   var User = this;
   var decoded;
-
+  
   try {
     decoded = jwt.verify(token, 'Monkey D Luffy');
   } catch (e) {
@@ -89,25 +83,24 @@ UserSchema.statics.findByToken = function(token){
 
   return User.findOne({
     '_id': decoded._id,
-    'tokens.token': token,
-    'tokens.access': 'auth'
+    'token': token,
   }); 
 }
 
-// UserSchema.pre('save', function (next) {
-//   var user = this;
+UserSchema.pre('save', function (next) {
+  var user = this;
 
-//   if (user.isModified('password')) {
-//     bcrypt.genSalt(10, (err, salt) => {
-//       bcrypt.hash(user.password, salt, (err, hash) => {
-//         user.password = hash;
-//         next();
-//       });
-//     });
-//   } else {
-//     next();
-//   }
-// });
+  if (user.isModified('password')) {
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        user.password = hash;
+        next();
+      });
+    });
+  } else {
+    next();
+  }
+});
 
 UserSchema.statics.findByCredentials = function (username, password) {
   var User = this;
@@ -118,29 +111,25 @@ UserSchema.statics.findByCredentials = function (username, password) {
     else
     {
       return new Promise((resolve, reject) =>{
-          resolve(user);
+        // Use bcrypt.compare to compare password and user.password
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            resolve(user);
+          } else {
+            reject();
+          }
+        });
+        // resolve(user);
       })
-
-      // return new Promise((resolve, reject) => {
-      // // Use bcrypt.compare to compare password and user.password
-      //   bcrypt.compare(password, user.password, (err, res) => {
-      //     if (res) {
-      //       resolve(user);
-      //     } else {
-      //       reject();
-      //     }
-      //   });
-      // });
     }
   });
 };
-
-UserSchema.methods.removeToken = function (token) {
+UserSchema.methods.removeToken = function (oldtoken) {
   var user = this;
 
   return user.updateOne({
-    $pull: {
-      tokens: {token}
+    $unset: {
+      token: oldtoken
     }
   });
 };
