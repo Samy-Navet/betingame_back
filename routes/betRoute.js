@@ -1,6 +1,6 @@
 const betCreate = require('./../controllers/bet/betCreate');
 const betDetails = require('./../controllers/bet/betDetails');
-const betUpdateStatus = require('./../controllers/bet/betUpdateStatus');
+const {betUpdateStatus} = require('./../controllers/bet/betUpdateStatus');
 const betsList = require('./../controllers/bet/betsList');
 
 
