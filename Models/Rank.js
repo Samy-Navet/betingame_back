@@ -42,6 +42,12 @@ var RankSchema = new mongoose.Schema({
         required: true
     },
 
+    betAverage: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+
     bestBet:{
         type: String,
 

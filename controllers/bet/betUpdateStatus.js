@@ -92,7 +92,7 @@ const updateBetsAfterMatch = (id_match) => {
                         // modifier user model before this !!
                         Bet.updateOne({_id: betid}, {$set : {status: 2}}, {new: true}).then((result)=>{
                             User.findOneAndUpdate({_id: userid},{$inc :{money : (bets[betIndex].cotetotale * bets[betIndex].bet), score : (bets[betIndex].cotetotale * bets[betIndex].bet)}},{new : true}).then((user)=>{
-                                // res.status(200).send(result);
+                                // update rank
                                 console.log('bet success')
                             })
                         })
@@ -100,7 +100,7 @@ const updateBetsAfterMatch = (id_match) => {
                     else if(endedMatchNumber === matchNumber){
                         // update status ended
                         Bet.updateOne({_id: betid}, {$set : {status: -1}}, {new: true}).then((result)=>{
-                            // res.status(200).send(result);
+                            // update rank
                             console.log('bet lost')
                         })
                     }
@@ -108,7 +108,7 @@ const updateBetsAfterMatch = (id_match) => {
                     {
                         // update status in progress
                         Bet.updateOne({_id: betid}, {$set : {status: 1}}, {new : true}).then((result)=>{
-                            // res.status(200).send(result);
+                            // updaterank
                             console.log('bet in progress')
                         })
                     }
