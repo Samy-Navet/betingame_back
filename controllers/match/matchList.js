@@ -10,6 +10,11 @@
  *     }
  * 
  * @apiParam {String} for_bets FOR THE APP : match list only for bets (in the app).
+ * 
+ * @apiParamExample {url} Request-Example:
+ *     {
+ *         "url" : "/match?for_bets=1"
+ *       }
  *
  * @apiSuccess {String} title match title.
  * @apiSuccess {String} game game name.
@@ -53,7 +58,7 @@
  */
 var {Match} = require('./../../Models/Match');
 const matchList = (req, res) =>{
-    if(req.query.for_bets){
+    if(req.query.for_bets && req.query.for_bets == 1){
         Match.find({state: 0}).select('-__v').then((matchs) =>{
             if(matchs){
                 res.status(200).send(matchs)
