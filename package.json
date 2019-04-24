@@ -18,6 +18,7 @@
     "jsonwebtoken": "^8.5.0",
     "lodash": "^4.17.11",
     "mongoose": "^5.4.19",
+    "multer": "^1.4.1",
     "validator": "^10.11.0"
   },
   "engines": {
@@ -25,7 +26,7 @@
   },
   "apidoc": {
     "title": "BetInGame documentation",
-    "url" : "https://betingame.herokuapp.com"
+    "url": "https://betingame.herokuapp.com"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
