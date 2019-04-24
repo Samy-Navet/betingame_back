@@ -34,7 +34,8 @@ var MatchSchema = new mongoose.Schema({
         default: 0
     },
     winner : {
-        type : String 
+        type : String,
+        default: null
     },
     participant: [{
         participant_api_id : {
@@ -50,6 +51,9 @@ var MatchSchema = new mongoose.Schema({
             type: Number,
             required: true,
             default : 0
+        },
+        logo:{
+            type: String
         }
     }]
 }, {collection: 'match'});

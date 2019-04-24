@@ -8,6 +8,13 @@
  *     {
  *       "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM"
  *     }
+ * 
+ * @apiParam {String} for_bets FOR THE APP : match list only for bets (in the app) => for_bets = 1.
+ * 
+ * @apiParamExample {url} Request-Example:
+ *     {
+ *         "url" : "/match?for_bets=1"
+ *       }
  *
  * @apiSuccess {String} title match title.
  * @apiSuccess {String} game game name.
@@ -51,18 +58,36 @@
  */
 var {Match} = require('./../../Models/Match');
 const matchList = (req, res) =>{
-    Match.find().select('-__v').then((matchs) =>{
-        if(matchs){
-            res.status(200).send(matchs)
-        }
-        else
-        {
-            res.status(404).send(null)
-        }
-
-    }).catch((e) =>{
-        res.status(400).send(e);
-    })
+    if(req.query.for_bets && req.query.for_bets == 1){
+        Match.find({state: 0}).select('-__v').then((matchs) =>{
+            if(matchs){
+                res.status(200).send(matchs)
+            }
+            else
+            {
+                res.status(404).send(null)
+            }
+    
+        }).catch((e) =>{
+            res.status(400).send(e);
+        })
+    }
+    else
+    {
+        Match.find().select('-__v').then((matchs) =>{
+            if(matchs){
+                res.status(200).send(matchs)
+            }
+            else
+            {
+                res.status(404).send(null)
+            }
+    
+        }).catch((e) =>{
+            res.status(400).send(e);
+        })
+    }
+    
 };
 
 module.exports = matchList;
