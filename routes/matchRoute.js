@@ -11,11 +11,11 @@ const matchDelete = require('./../controllers/match/matchDelete');
 
 module.exports = (app) => {
     app.route('/match')
-    .get(authenticate, matchList)
+    .get(matchList)
     .post(admin, matchCreate);
 
     app.route('/match/:id')
-        .get(authenticate, matchDetails)
+        .get(matchDetails)
         .put(admin, matchUpdate)
         .delete(admin, matchDelete);
 

@@ -525,6 +525,19 @@ define({ "api": [
         }
       ]
     },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "for_bets",
+            "description": "<p>FOR THE APP : match list only for bets (in the app).</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
