@@ -1,3 +1,4 @@
+const admin = require('./../middleware/adminAuthenticate');
 const betCreate = require('./../controllers/bet/betCreate');
 const betDetails = require('./../controllers/bet/betDetails');
 const {betUpdateStatus} = require('./../controllers/bet/betUpdateStatus');
@@ -10,7 +11,7 @@ app.route('/user/:id/bet')
     .get(betsList)
 
 app.route('/user/:id/bet/:betid')
-    .put(betUpdateStatus)
+    .put(admin, betUpdateStatus)
     .get(betDetails)
 }
 

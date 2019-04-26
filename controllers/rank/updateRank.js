@@ -25,6 +25,7 @@ const updateRankAfterBet = (id_user, betStatus, betCote, bet) => {
 }
 
 const updateRankStats = (id_user)=>{
+    var now = Date.now()
     let betsNumber = 0;
     let wonBets = 0;
     let canceledBets = 0;
@@ -59,4 +60,4 @@ const updateRankStats = (id_user)=>{
     })
 }
 
-module.exports = updateRankAfterBet;
+module.exports = {updateRankAfterBet,updateAllRanksStats,updateRankStats};
