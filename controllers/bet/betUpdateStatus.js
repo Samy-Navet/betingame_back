@@ -4,10 +4,12 @@ var {Bet} = require('./../../Models/Bet');
 var {Match} = require('./../../Models/Match');
 var {User} = require('./../../Models/User');
 
+var updateRank = require('./../rank/updateRank');
+
 const betUpdateStatus = (req,res) => {
     var betid = req.params.betid
     var userid = req.params.id
-    Bet.findOne({_id : betid, userid: userid}).then((bet) =>{
+    Bet.findOne({_id : betid, userid: userid, status: {$in: [0,1] } }).then((bet) =>{
         var matchs = bet.matchs;
         matchQuery = [];
         for(var i = 0; i < matchs.length; i++){
@@ -34,7 +36,8 @@ const betUpdateStatus = (req,res) => {
                     // update status ended + give credit
                     // modifier user model before this !!
                     Bet.updateOne({_id: betid}, {$set : {status: 2}}, {new: true}).then((result)=>{
-                        User.findOneAndUpdate({_id: userid},{$inc :{money : (bet.cotetotale * bet.bet), score : (bet.cotetotale * bet.bet)}},{new : true}).then((user)=>{
+                        User.findOneAndUpdate({_id: userid},{$inc :{money : (bet.cotetotale * bet.bet) }},{new : true}).then((user)=>{
+                            updateRank.updateRankAfterBet(userid,2,bet.cotetotale,bet.bet);
                             res.status(200).send(result);
                         })
                     })
@@ -42,6 +45,7 @@ const betUpdateStatus = (req,res) => {
                 else if(endedMatchNumber === matchNumber){
                     // update status ended
                     Bet.updateOne({_id: betid}, {$set : {status: -1}}, {new: true}).then((result)=>{
+                        updateRank.updateRankAfterBet(userid,-1,bet.cotetotale,bet.bet);
                         res.status(200).send(result);
                     })
                 }
@@ -62,7 +66,7 @@ const betUpdateStatus = (req,res) => {
 }
 
 const updateBetsAfterMatch = (id_match) => {
-    Bet.find({'matchs.matchid': id_match}).lean().then((bets) =>{
+    Bet.find({'matchs.matchid': id_match, status: {$in: [0,1] } }).lean().then((bets) =>{
         bets.forEach((bet, betIndex) =>{
             var betid = bets[betIndex]._id;
             var userid = bets[betIndex].userid;
@@ -89,27 +93,24 @@ const updateBetsAfterMatch = (id_match) => {
                 if(endedMatchNumber > 0){
                     if(endedMatchNumber === matchNumber && matchSuccess === matchNumber){
                         // update status ended + give credit
-                        // modifier user model before this !!
                         Bet.updateOne({_id: betid}, {$set : {status: 2}}, {new: true}).then((result)=>{
-                            User.findOneAndUpdate({_id: userid},{$inc :{money : (bets[betIndex].cotetotale * bets[betIndex].bet), score : (bets[betIndex].cotetotale * bets[betIndex].bet)}},{new : true}).then((user)=>{
-                                // res.status(200).send(result);
-                                console.log('bet success')
+                            User.findOneAndUpdate({_id: userid},{$inc :{money : (bets[betIndex].cotetotale * bets[betIndex].bet) }},{new : true}).then((user)=>{
+                                // update rank
+                                updateRank.updateRankAfterBet(userid, 2, bets[betIndex].cotetotale, bets[betIndex].bet);
                             })
                         })
                     }
                     else if(endedMatchNumber === matchNumber){
                         // update status ended
                         Bet.updateOne({_id: betid}, {$set : {status: -1}}, {new: true}).then((result)=>{
-                            // res.status(200).send(result);
-                            console.log('bet lost')
+                            // update rank
+                            updateRank.updateRankAfterBet(userid, -1, bets[betIndex].cotetotale, bets[betIndex].bet);
                         })
                     }
                     else
                     {
                         // update status in progress
                         Bet.updateOne({_id: betid}, {$set : {status: 1}}, {new : true}).then((result)=>{
-                            // res.status(200).send(result);
-                            console.log('bet in progress')
                         })
                     }
                 }

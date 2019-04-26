@@ -12,6 +12,7 @@ const matchRoute = require('./routes/matchRoute');
 const cartRoute = require('./routes/cartRoute');
 const betRoute = require('./routes/betRoute');
 const docRoute = require('./routes/docRoute');
+const rankRoute = require('./routes/rankRoute')
 // middlewares
 var {authenticate} = require('./middleware/authenticate')
 var {admin} = require('./middleware/adminAuthenticate')
@@ -34,6 +35,7 @@ userRoute(app);
 matchRoute(app);
 cartRoute(app);
 betRoute(app);
+rankRoute(app);
 docRoute(app);
 app.listen(port, function() {
     console.log('Server en écoute :) port '+port);

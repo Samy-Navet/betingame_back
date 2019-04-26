@@ -38,11 +38,6 @@ var UserSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
-  score: {
-    type: Number,
-    required: true,
-    default: 0
-  },
   admin: {
     type: Boolean,
     default: false
