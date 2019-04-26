@@ -3,7 +3,7 @@ var {User} = require('./../../Models/User');
 var _ = require('lodash');
 
 const rankList = (req, res) => {
-    Rank.find({}).select('-__v -_id').sort([['score','-1']]).lean().then((ranks)=>{
+    Rank.find({}).select('-__v').sort([['score','-1']]).lean().then((ranks)=>{
         var ranksList = ranks;
         let userQuery = []
         for(var i = 0; i < ranks.length; i++){
