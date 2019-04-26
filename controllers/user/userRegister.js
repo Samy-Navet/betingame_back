@@ -31,7 +31,7 @@
  *
  */
 var {User} = require('./../../Models/User');
-var {Rank} = require('./../../models/Rank');
+var {Rank} = require('./../../Models/Rank');
 
 
 const userRegister = (req, res) =>{

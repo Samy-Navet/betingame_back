@@ -1,4 +1,4 @@
-const {Rank} = require('./../../Models/Rank');
+var {Rank} = require('./../../Models/Rank');
 const {Bet} = require('./../../Models/Bet');
 
 const updateAllRanksStats = () =>{
