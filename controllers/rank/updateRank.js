@@ -53,9 +53,7 @@ const updateRankStats = (id_user)=>{
             'coteAverage': coteAverage,
             'updatedAt': now
         }).then(()=>{
-
-        }).catch((err)=>{
-
+            // futurs logs
         })
     })
 }
