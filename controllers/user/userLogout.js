@@ -17,20 +17,19 @@
  *
  */
 var {User} = require('./../../Models/User');
+var {adminOrUser} = require('./../../middleware/authenticate');
 
 const userLogout = (req,res) =>{
     var id = req.params.id;
-    if(req.user._id == id){
+    adminOrUser(id, req.user._id).then(()=>{
         req.user.removeToken(req.token).then(() =>{
             res.status(200).send();
-        }, (e) =>{
-            res.status(400).send(e);
+        }, (err) =>{
+            res.status(500).send(err);
         })
-    }
-    else
-    {
-        res.status(401).send();
-    }
+    }).catch((e)=>{
+        res.status(401).send(e);
+    })
 }
 
 module.exports = userLogout;

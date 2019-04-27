@@ -23,18 +23,23 @@
  *
  */
 var {Cart} = require('./../../Models/Cart');
+var {onlyUser} = require('./../../middleware/authenticate');
 
 const cartDeleteAll = (req, res) => {
     var id = req.params.id;
-    Cart.findOne({userid: id}).then((cart) =>{
-        if(cart){
-            cart.matchs = [];
-            Cart.findOneAndUpdate({userid: id},{$set: cart}, {new: true}).then((result) =>{
-                res.status(200).send(result)
-            }).catch((err) =>{
-                res.status(400).send()
-            }) 
-        }  
+    onlyUser(id, req.user._id).then(()=>{
+        Cart.findOne({userid: id}).then((cart) =>{
+            if(cart){
+                cart.matchs = [];
+                Cart.findOneAndUpdate({userid: id},{$set: cart}, {new: true}).then((result) =>{
+                    res.status(200).send(result)
+                }).catch((err) =>{
+                    res.status(500).send(err)
+                }) 
+            }  
+        })
+    }).catch((e)=>{
+        res.status(401).send(e)
     })
 };
 

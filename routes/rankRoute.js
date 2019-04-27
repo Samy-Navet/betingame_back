@@ -6,7 +6,7 @@ module.exports = (app) => {
     app.route('/rank')
         .get(rankList);
 
-    app.route('/rank/:id')
+    app.route('/rank/:rankid')
         .get(rankDetails.rankDetail);
 
     app.route('/user/:id/rank')

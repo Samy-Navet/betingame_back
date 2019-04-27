@@ -35,15 +35,13 @@
  * 
  */
 var {User} = require('./../../Models/User');
+const {adminOrUser} = require('./../../middleware/authenticate');
 const userDetails = (req,res) =>{
-    var id = req.params.id
-    if(req.user._id == id){
+    adminOrUser(req.params.id, req.user._id).then(()=>{
         res.send(req.user);
-    }
-    else
-    {
-        res.status(401).send();
-    }
+    }).catch((e)=>{
+        res.status(401).send(e);
+    })
 }
 
 module.exports = userDetails;

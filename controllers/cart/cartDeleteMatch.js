@@ -23,15 +23,20 @@
  *
  */
 var {Cart} = require('./../../Models/Cart');
+var {onlyUser} = require('./../../middleware/authenticate');
 
 const cartDeleteMatch = (req,res) =>{
     var id = req.params.id;
     var match = req.params.match;
-    Cart.findOneAndUpdate({userid : id},{$pull:{'matchs': {'matchid': match}}},{new: true}).then((user) =>{
-        res.status(200).send(user);
-    })
-    .catch((err) =>{
-        res.status(400).send();
+    onlyUser(id, req.user._id).then(()=>{
+        Cart.findOneAndUpdate({userid : id},{$pull:{'matchs': {'matchid': match}}},{new: true}).then((user) =>{
+            res.status(200).send(user);
+        })
+        .catch((err) =>{
+            res.status(500).send(err);
+        })
+    }).catch((e)=>{
+        res.status(401).send(e);
     })
 }
 

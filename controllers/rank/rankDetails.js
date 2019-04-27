@@ -19,7 +19,7 @@ const rankDetailByUser = (req, res) => {
 }
 
 const rankDetail = (req, res) => {
-    var rankid = req.params.id
+    var rankid = req.params.rankid
     Rank.findOne({_id: rankid}).select('-__v ').lean().then((rank)=>{
         User.findOne({_id: rank.userid}).select('username').lean().then((user)=>{
             var username = user.username;
