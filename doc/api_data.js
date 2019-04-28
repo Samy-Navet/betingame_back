@@ -106,30 +106,29 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/user/:id/bet/",
+    "url": "/bet/",
     "title": "get the bet list",
     "name": "betList",
     "group": "Bet",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "x-auth",
-            "description": "<p>Users unique token.</p>"
-          }
-        ]
-      },
+    "success": {
       "examples": [
         {
-          "title": "Header-Example:",
-          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM\"\n}",
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n [{\n      \"_id\": \"5ca70546c5b2eb31fc57330c\",\n      \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n      \"matchs\": [\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330e\",\n              \"matchid\": \"5c530a65b328b6280cd4d1ae\",\n              \"participantchoice\": \"5c530a65b328b6280cd4d1b0\"\n          },\n          {\n              \"_id\": \"5ca70546c5b2eb31fc57330d\",\n              \"matchid\": \"5c373bd0cde84e428ce07d3d\",\n              \"participantchoice\": \"5c373bd0cde84e428ce07d3e\"\n          }\n      ],\n      \"bet\": 50,\n      \"status\": 0,\n      \"cotetotale\": 2.52,\n  }]",
           "type": "json"
         }
       ]
     },
+    "version": "0.0.0",
+    "filename": "controllers/bet/betsList.js",
+    "groupTitle": "Bet"
+  },
+  {
+    "type": "get",
+    "url": "/user/:id/bet/",
+    "title": "get the user bet list",
+    "name": "userBetList",
+    "group": "Bet",
     "success": {
       "examples": [
         {
