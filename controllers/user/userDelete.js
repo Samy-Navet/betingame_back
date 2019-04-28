@@ -17,20 +17,19 @@
  *
  */
 var {User} = require('./../../Models/User');
+var {adminOrUser} = require('./../../middleware/authenticate');
 
 const userDelete = (req, res) => {
     var id = req.params.id
-    if(req.user._id == id || req.user.admin == true){
+    adminOrUser(id, req.user._id).then(()=>{
         User.deleteOne({_id: id}).then(() =>{
             res.status(200).send();
         }).catch((e) =>{
-            res.status(400).send(e);
+            res.status(500).send(e);
         })
-    }
-    else
-    {
-        res.status(401).send();
-    }
+    }).catch((e)=>{
+        res.status(401).send(e);
+    })
 }
 
 module.exports = userDelete;

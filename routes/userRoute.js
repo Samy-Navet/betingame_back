@@ -1,4 +1,4 @@
-const authenticate = require('./../middleware/authenticate');
+const {authenticate} = require('./../middleware/authenticate');
 const userDelete = require('./../controllers/user/userDelete');
 const userDetails = require('./../controllers/user/userDetails');
 const userList = require('./../controllers/user/userList');
