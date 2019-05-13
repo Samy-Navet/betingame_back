@@ -55,7 +55,7 @@ const matchCreate = (req, res) =>{
     match.save().then((result) =>{
         res.status(200).send();
     }).catch((e) => {
-        res.status(400).send(e);
+        res.status(400).send('error : 'e);
     })
 }
 
