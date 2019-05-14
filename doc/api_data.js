@@ -144,7 +144,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/match/",
+    "url": "/user/:userid/cart/",
     "title": "put a match in the cart",
     "name": "cartCreate",
     "group": "Cart",
