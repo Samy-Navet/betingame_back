@@ -1,5 +1,5 @@
 /**
- * @api {post} /match/ put a match in the cart
+ * @api {post} /user/:userid/cart/ put a match in the cart
  * @apiName cartCreate
  * @apiGroup Cart
  *

@@ -61,7 +61,8 @@ const matchList = (req, res) =>{
     if(req.query.for_bets && req.query.for_bets == 1){
         Match.find({state: 0}).select('-__v').then((matchs) =>{
             if(matchs){
-                res.status(200).send(matchs)
+                
+                // res.status(200).send(matchs)
             }
             else
             {
