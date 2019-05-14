@@ -62,7 +62,7 @@ const matchList = (req, res) =>{
         Match.find({state: 0}).select('-__v').then((matchs) =>{
             if(matchs){
                 
-                // res.status(200).send(matchs)
+                res.status(200).send(matchs)
             }
             else
             {
