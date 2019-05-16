@@ -52,12 +52,12 @@ const cartCreate = (req,res) => {
                     Cart.findOneAndUpdate({userid: id},{$set: cart}, {new: true}).then((result) =>{
                         res.status(200).send(result)
                     }).catch((err) =>{
-                        res.status(400).send()
+                        res.status(400).send({'mongoError': err})
                     })   
                 }
                 else
                 {
-                    res.status(403).send();
+                    res.status(403).send({'error': 'match already in cart'});
                 }
             }
             else
@@ -72,14 +72,13 @@ const cartCreate = (req,res) => {
             
                 newCart.save().then(() =>{
                     res.status(200).send(newCart);
-                }).catch(() =>{
-                    res.status(500).send()
+                }).catch((e) =>{
+                    res.status(500).send({'mongoError': e});
                 })
             }
             
         }).catch((e) =>{
-            console.log(e);
-            res.status(500).send(e);
+            res.status(500).send({'mongoError': e});
         })
     }).catch((e)=>{
         res.status(401).send(e);
