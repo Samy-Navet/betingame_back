@@ -9,7 +9,6 @@ var {mongoose} = require('./db/mongoose');
 var router = express.Router();
 const userRoute = require('./routes/userRoute');
 const matchRoute = require('./routes/matchRoute');
-const cartRoute = require('./routes/cartRoute');
 const betRoute = require('./routes/betRoute');
 const docRoute = require('./routes/docRoute');
 const rankRoute = require('./routes/rankRoute')
@@ -34,7 +33,6 @@ app.use(function(req, res, next) {
 
 userRoute(app);
 matchRoute(app);
-cartRoute(app);
 betRoute(app);
 rankRoute(app);
 docRoute(app);

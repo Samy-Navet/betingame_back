@@ -55,7 +55,6 @@
  */
 var {Bet} = require('./../../Models/Bet');
 var {Match} = require('./../../Models/Match');
-var {Cart} = require('./../../Models/Cart');
 var {User} = require('./../../Models/User');
 var {onlyUser} = require('./../../middleware/authenticate');
 
@@ -72,12 +71,10 @@ const betCreate = (req,res) => {
         var coteTotale = 0;
         var matchs = body.matchs
         promises = [];
-        matchToRemoveFromCart = [];
         for(var i = 0; i < matchs.length; i++){
             promises.push(new Promise((resolve, reject) =>{
                 Match.findOne({ _id : matchs[i].matchid},{"participant" : {$elemMatch : {_id : matchs[i].participantchoice}}}).then((matchDetails) =>{
                     coteTotale += matchDetails.participant[0].coteparticipant;
-                    matchToRemoveFromCart.push(matchDetails._id);
                     resolve(coteTotale);
                 }).catch((err) => {
                     reject(err);
@@ -96,10 +93,7 @@ const betCreate = (req,res) => {
                             newBet.save().then(() =>{
                                 // I/ deduction de l'argent
                                 user.updateOne({$inc: {money: -body.bet}}, {new: true}).then(()=>{
-                                    // II/ VIDAGE DU PANIER
-                                    Cart.findOneAndUpdate({userid: id}, {$pull: {  "matchs" : { "matchid" : {$in : matchToRemoveFromCart } } } }, {new : true}).then((cart) =>{
-                                        res.status(200).send(newBet);
-                                    }) 
+                                    res.status(200).send(newBet);
                                 })              
                             }).catch(() =>{
                                 res.status(400).send({'error':'not saved'});
