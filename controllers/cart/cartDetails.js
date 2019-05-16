@@ -24,7 +24,7 @@ const cartDetails = (req,res) =>{
             })
         })
         .catch((err) =>{
-            res.status(500).send();
+            res.status(500).send({'mongoError': err});
         })
     }).catch((e)=>{
         res.status(401).send(e);

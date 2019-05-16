@@ -33,7 +33,7 @@ const cartDeleteMatch = (req,res) =>{
             res.status(200).send(user);
         })
         .catch((err) =>{
-            res.status(500).send(err);
+            res.status(500).send({'mongoErr' : err});
         })
     }).catch((e)=>{
         res.status(401).send(e);

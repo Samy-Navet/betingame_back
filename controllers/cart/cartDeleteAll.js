@@ -34,7 +34,7 @@ const cartDeleteAll = (req, res) => {
                 Cart.findOneAndUpdate({userid: id},{$set: cart}, {new: true}).then((result) =>{
                     res.status(200).send(result)
                 }).catch((err) =>{
-                    res.status(500).send(err)
+                    res.status(500).send({'mongoErr': err})
                 }) 
             }  
         })
