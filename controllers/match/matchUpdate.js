@@ -65,13 +65,15 @@
  *
  */
 var {Match} = require('./../../Models/Match');
+var betUpdate = require('./../bet/betUpdateStatus');
 
 const matchUpdate = (req,res) => {
     var id = req.params.id
     var body = req.body
-    Match.findByIdAndUpdate(id,{$set: body}, {new: true}).then((result) =>{
+    Match.findOneAndUpdate({_id: id},{$set: body}, {new: true}).then((result) =>{
         if(result){
-            res.status(200).send()
+            res.status(200).send();
+            betUpdate.updateBetsAfterMatch(id);
         }
         else
         {

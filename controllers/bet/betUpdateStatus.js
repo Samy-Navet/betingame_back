@@ -4,7 +4,7 @@ var {Bet} = require('./../../Models/Bet');
 var {Match} = require('./../../Models/Match');
 var {User} = require('./../../Models/User');
 
-var updateRank = require('./../rank/updateRank');
+var updateRank = require('./../user/updateUserRank');
 
 const betUpdateStatus = (req,res) => {
     var betid = req.params.betid
