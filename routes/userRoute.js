@@ -16,7 +16,7 @@ app.route('/user')
 
 // user list for ranks
 app.route('/user/rank')
-    .get(userRankList)
+    .get(userRankList);
 
 app.route('/user/:id')
     .get(authenticate, userDetails)

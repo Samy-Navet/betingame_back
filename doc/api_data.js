@@ -757,208 +757,6 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/rank/:rankid",
-    "title": "get the ranking details",
-    "name": "rankDetails",
-    "group": "Rank",
-    "description": "<p>if you wants to get the ranks by user, there is a different route : /user/:id/rank/</p>",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "\n\"url\" : \"/rank/:rankid\"\n\"url2\": \"/user/:userid/rank/\"",
-          "type": "url"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "score",
-            "description": "<p>ranking score of the user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "betsNumber",
-            "description": "<p>number of bets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "wonBets",
-            "description": "<p>number of won bets</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "canceledBets",
-            "description": "<p>number of canceledBets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "coteAverage",
-            "description": "<p>Average of all user bets betting odds</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "betAverage",
-            "description": "<p>average of all the bets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "userid",
-            "description": "<p>_id of the user</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "updatedAt",
-            "description": "<p>last update of the ranking</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>username</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\n  {\n      \"_id\": \"5cbdd44ab7ec0b0a806d3140\",\n      \"score\": 0,\n      \"betsNumber\": 0,\n      \"wonBets\": 0,\n      \"canceledBets\": 0,\n      \"coteAverage\": 0,\n      \"betAverage\": 23.5,\n      \"userid\": \"5cbdd44ab7ec0b0a806d313e\",\n      \"updatedAt\": \"2019-04-22T14:48:42.354Z\",\n      \"username\": \"tata\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "controllers/rank/rankDetails.js",
-    "groupTitle": "Rank"
-  },
-  {
-    "type": "get",
-    "url": "/rank/",
-    "title": "get the ranking list",
-    "name": "rankList",
-    "group": "Rank",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>user id IF CONNECTED : match to get the list AND the user Rank. if no id parameter =&gt; myRank = null</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n    \"url\" : \"/match?id=1asbzhz254fdz51\"\n  }",
-          "type": "url"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "score",
-            "description": "<p>ranking score of the user.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "betsNumber",
-            "description": "<p>number of bets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "wonBets",
-            "description": "<p>number of won bets</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "canceledBets",
-            "description": "<p>number of canceledBets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "coteAverage",
-            "description": "<p>Average of all user bets betting odds</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "betAverage",
-            "description": "<p>average of all the bets.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "userid",
-            "description": "<p>_id of the user</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Date",
-            "optional": false,
-            "field": "updatedAt",
-            "description": "<p>last update of the ranking</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>username</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "  HTTP/1.1 200 OK\n{\n    \"myRank\": {\n        \"_id\": \"5cbdd44ab7ec0b0a806d3140\",\n        \"score\": 0,\n        \"betsNumber\": 0,\n        \"wonBets\": 0,\n        \"canceledBets\": 0,\n        \"coteAverage\": 0,\n        \"betAverage\": 23.5,\n        \"userid\": \"5cbdd44ab7ec0b0a806d313e\",\n        \"updatedAt\": \"2019-04-22T14:48:42.354Z\",\n        \"username\": \"tata\"\n    },\n    \"ranking\": [\n        {\n            \"_id\": \"5cc1aeb4fecb2d19a42c9da0\",\n            \"score\": 225,\n            \"betsNumber\": 1,\n            \"wonBets\": 1,\n            \"canceledBets\": 0,\n            \"coteAverage\": 6,\n            \"betAverage\": 23.5,\n            \"userid\": \"5cc1aeb3fecb2d19a42c9d9f\",\n            \"updatedAt\": \"2019-04-25T12:57:24.215Z\",\n            \"username\": \"toto\"\n        },\n        {\n            \"_id\": \"5cc2c69f90f84d8d1bec62c6\",\n            \"score\": 126,\n            \"betsNumber\": 2,\n            \"wonBets\": 1,\n            \"canceledBets\": 0,\n            \"coteAverage\": 2.52,\n            \"userid\": \"5c3720c1bcdf441cb4375fc7\",\n            \"updatedAt\": \"2019-04-26T09:21:50.121Z\",\n            \"betAverage\": 50,\n            \"username\": \"Samy\"\n        },\n        {\n            \"_id\": \"5cbdd44ab7ec0b0a806d3140\",\n            \"score\": 0,\n            \"betsNumber\": 0,\n            \"wonBets\": 0,\n            \"canceledBets\": 0,\n            \"coteAverage\": 0,\n            \"userid\": \"5cbdd44ab7ec0b0a806d313e\",\n            \"updatedAt\": \"2019-04-22T14:48:42.354Z\",\n            \"username\": \"tata\"\n        }\n    ]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "controllers/rank/rankList.js",
-    "groupTitle": "Rank"
-  },
-  {
-    "type": "get",
     "url": "/user/:id",
     "title": "request user information",
     "name": "userDetails",
@@ -1095,17 +893,24 @@ define({ "api": [
           },
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "String",
             "optional": false,
-            "field": "tokens",
-            "description": "<p>array of tokens of the User.</p>"
+            "field": "token",
+            "description": "<p>token of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "stats",
+            "description": "<p>Object with the stats of the user.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[\n      {\n          \"_id\": \"5ca3169662ca77093cc91f22\",\n          \"username\": \"toto\",\n          \"email\": \"toto@gmail.com\",\n          \"admin\": false,\n          \"tokens\": [\n              {\n                  \"access\": \"auth\",\n                  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n              }\n          ]\n      }\n  ]",
+          "content": "HTTP/1.1 200 OK\n[\n      {\n          \"_id\": \"5ca3169662ca77093cc91f22\",\n          \"username\": \"toto\",\n          \"email\": \"toto@gmail.com\",\n          \"money\" : 430,\n          \"rank\" : {\n             \"score\": 225,\n             \"betsNumber\": 1,\n             \"wonBets\": 1,\n             \"canceledBets\": 0,\n             \"coteAverage\": 6,\n             \"betAverage\": 23.5,\n         }\n      }\n  ]",
           "type": "json"
         }
       ]
@@ -1269,6 +1074,105 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "controllers/user/userLogout.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "get",
+    "url": "/user/rank",
+    "title": "get the ranking list",
+    "name": "userRankList",
+    "group": "User",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>user id IF CONNECTED : match to get the list AND the user Rank. if no id parameter =&gt; myRank = null</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n    \"url\" : \"/user/rank?id=1asbzhz254fdz51\"\n  }",
+          "type": "url"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "score",
+            "description": "<p>ranking score of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "betsNumber",
+            "description": "<p>number of bets.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "wonBets",
+            "description": "<p>number of won bets</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "canceledBets",
+            "description": "<p>number of canceledBets.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "coteAverage",
+            "description": "<p>Average of all user bets betting odds</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "betAverage",
+            "description": "<p>average of all the bets.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>id of the user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>username</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n{\n    \"myRank\": {\n            \"_id\": \"5ca3169662ca77093cc91f22\",\n            \"username\": \"toto\",\n            \"rank\": 25,\n            \"stats\" : {\n               \"score\": 225,\n               \"betsNumber\": 1,\n               \"wonBets\": 1,\n               \"canceledBets\": 0,\n               \"coteAverage\": 6,\n               \"betAverage\": 23.5,\n           }\n        }\n    \"ranking\": [\n        {\n            \"_id\": \"5ca3169662ca77093cc91f22\",\n            \"username\": \"tutu\",\n            \"rank\" : 1,\n            \"stats\" : {\n               \"score\": 700,\n               \"betsNumber\": 1,\n               \"wonBets\": 1,\n               \"canceledBets\": 0,\n               \"coteAverage\": 6,\n               \"betAverage\": 23.5,\n           }\n        },\n       {\n            \"_id\": \"5ca3169662ca77093cc91f22\",\n            \"username\": \"tata\",\n            \"rank\" : 2,\n            \"stats\" : {\n               \"score\": 500,\n               \"betsNumber\": 1,\n               \"wonBets\": 1,\n               \"canceledBets\": 0,\n               \"coteAverage\": 6,\n               \"betAverage\": 23.5,\n           }\n        },\n       {\n            \"_id\": \"5ca3169662ca77093cc91f22\",\n            \"username\": \"titi\",\n            \"rank\": 3,\n            \"stats\" : {\n               \"score\": 300,\n               \"betsNumber\": 1,\n               \"wonBets\": 1,\n               \"canceledBets\": 0,\n               \"coteAverage\": 6,\n               \"betAverage\": 23.5,\n           }\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/user/userRankList.js",
     "groupTitle": "User"
   },
   {
