@@ -44,6 +44,42 @@ var UserSchema = new mongoose.Schema({
   },
   token: {
     type:String
+  },
+  stats : {
+    score: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+  
+    betsNumber: {
+      type: Number,
+      default: 0,
+      required : true
+    },
+  
+    wonBets: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+  
+    canceledBets: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+    coteAverage: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+  
+    betAverage: {
+      type: Number,
+      default: 0,
+      required: true
+    },
   }
 }, {collection: 'user'});
 
@@ -52,7 +88,7 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','money']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','money','stats']);
 };
 
 UserSchema.methods.generateAuthToken = function () {

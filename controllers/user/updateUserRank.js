@@ -1,10 +1,10 @@
-var {Rank} = require('./../../Models/Rank');
+var {User} = require('./../../Models/User');
 const {Bet} = require('./../../Models/Bet');
 
 const updateAllRanksStats = () =>{
     var now = Date.now()
-    Rank.find({}).then((rank)=>{
-        rank.forEach((userRank, rankIndex)=>{
+    User.find({}).then((user)=>{
+        user.forEach((userRank, rankIndex)=>{
             updateRankStats(userRank.userid);
         })
     })
@@ -12,7 +12,7 @@ const updateAllRanksStats = () =>{
 
 const updateRankAfterBet = (id_user, betStatus, betCote, bet) => {
     if(betStatus === 2){
-        Rank.findOneAndUpdate({userid: id_user},{score: (betCote * bet)}).then((userRank)=>{
+        User.findOneAndUpdate({_id: id_user},{$inc: {'stats.score': (betCote * bet)}}).then((userRank)=>{
             updateRankStats(id_user);
         })
     }
@@ -45,13 +45,13 @@ const updateRankStats = (id_user)=>{
         })
         let coteAverage = coteSum / betsNumber;
         let betAverage = betSum / betsNumber;
-        Rank.updateOne({userid: id_user}, {
-            'betsNumber': betsNumber, 
-            'wonBets': wonBets, 
-            'canceledBets': canceledBets, 
-            'betAverage': betAverage,
-            'coteAverage': coteAverage,
-            'updatedAt': now
+        User.updateOne({_id: id_user}, {
+            'stats.betsNumber': betsNumber, 
+            'stats.wonBets': wonBets, 
+            'stats.canceledBets': canceledBets, 
+            'stats.betAverage': betAverage,
+            'stats.coteAverage': coteAverage,
+            'stats.updatedAt': now
         }).then(()=>{
             // futurs logs
         })
