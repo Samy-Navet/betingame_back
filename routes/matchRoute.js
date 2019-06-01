@@ -1,5 +1,4 @@
 const {authenticate, admin} = require('./../middleware/authenticate');
-// const admin = require('./../middleware/adminAuthenticate');
 const matchList = require('./../controllers/match/matchList');
 const matchDetails = require('./../controllers/match/matchDetails');
 const matchCreate = require('./../controllers/match/matchCreate');

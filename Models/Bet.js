@@ -1,7 +1,5 @@
-const {ObjectID} = require('mongodb');
 const mongoose = require('mongoose');
-const validator = require('validator');
-const _ = require('lodash')
+
 
 var betSchema = new mongoose.Schema({
     userid : {

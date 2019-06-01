@@ -15,7 +15,7 @@ const betUpdateStatus = (req,res) => {
         for(var i = 0; i < matchs.length; i++){
             matchQuery.push(matchs[i].matchid);
         }
-        // apres la maj du modele match
+
         Match.find({_id : {$in : matchQuery}}).lean().then((matchsDetails) =>{
             var matchNumber = 0;
             var endedMatchNumber = 0;
@@ -34,9 +34,9 @@ const betUpdateStatus = (req,res) => {
             if(endedMatchNumber > 0){
                 if(endedMatchNumber === matchNumber && matchSuccess === matchNumber){
                     // update status ended + give credit
-                    // modifier user model before this !!
                     Bet.updateOne({_id: betid}, {$set : {status: 2}}, {new: true}).then((result)=>{
                         User.findOneAndUpdate({_id: userid},{$inc :{money : (bet.cotetotale * bet.bet) }},{new : true}).then((user)=>{
+                            // update user stats
                             updateRank.updateRankAfterBet(userid,2,bet.cotetotale,bet.bet);
                             res.status(200).send(result);
                         })
@@ -45,6 +45,7 @@ const betUpdateStatus = (req,res) => {
                 else if(endedMatchNumber === matchNumber){
                     // update status ended
                     Bet.updateOne({_id: betid}, {$set : {status: -1}}, {new: true}).then((result)=>{
+                        // update user stats
                         updateRank.updateRankAfterBet(userid,-1,bet.cotetotale,bet.bet);
                         res.status(200).send(result);
                     })
@@ -75,7 +76,7 @@ const updateBetsAfterMatch = (id_match) => {
             for(var i = 0; i < matchs.length; i++){
                 matchQuery.push(matchs[i].matchid);
             }
-            // apres la maj du modele match
+
             Match.find({_id : {$in : matchQuery}}).lean().then((matchsDetails) =>{
                 var matchNumber = 0;
                 var endedMatchNumber = 0;
@@ -95,7 +96,7 @@ const updateBetsAfterMatch = (id_match) => {
                         // update status ended + give credit
                         Bet.updateOne({_id: betid}, {$set : {status: 2}}, {new: true}).then((result)=>{
                             User.findOneAndUpdate({_id: userid},{$inc :{money : (bets[betIndex].cotetotale * bets[betIndex].bet) }},{new : true}).then((user)=>{
-                                // update rank
+                                // update user stats
                                 updateRank.updateRankAfterBet(userid, 2, bets[betIndex].cotetotale, bets[betIndex].bet);
                             })
                         })
@@ -103,7 +104,7 @@ const updateBetsAfterMatch = (id_match) => {
                     else if(endedMatchNumber === matchNumber){
                         // update status ended
                         Bet.updateOne({_id: betid}, {$set : {status: -1}}, {new: true}).then((result)=>{
-                            // update rank
+                            // update user stats
                             updateRank.updateRankAfterBet(userid, -1, bets[betIndex].cotetotale, bets[betIndex].bet);
                         })
                     }
