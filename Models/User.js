@@ -80,6 +80,12 @@ var UserSchema = new mongoose.Schema({
       default: 0,
       required: true
     },
+
+    updatedAt: {
+      type: Date,
+      default: Date.now(),
+      required: true
+    }
   }
 }, {collection: 'user'});
 
