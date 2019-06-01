@@ -34,7 +34,31 @@
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- * 
+ *      {
+ *           "dates": {
+ *               "matchdate": "2018-10-26T15:45:00.000Z",
+ *               "time": "2019-01-10T12:34:24.576Z"
+ *           },
+ *           "game": "League of Legends",
+ *           "state": 0,
+ *           "_id": "5c373bd0cde84e428ce07d3d",
+ *           "title": "LEC - G2 vs MSF",
+ *           "participant": [
+ *               {
+ *                   "score": 0,
+ *                   "_id": "5c373bd0cde84e428ce07d3f",
+ *                   "participantnom": "G2",
+ *                   "coteparticipant": 1.02
+ *               },
+ *               {
+ *                   "score": 0,
+ *                   "_id": "5c373bd0cde84e428ce07d3e",
+ *                   "participantnom": "Misfits",
+ *                   "coteparticipant": 2.25
+ *               }
+ *           ],
+ *           "winner": null
+ *       }
  *
  */
 var {Match} = require('./../../Models/Match');

@@ -38,28 +38,28 @@
  *     HTTP/1.1 200 OK
  *      {
  *           "dates": {
- *               "matchdate": "2018-11-03T05:30:00.000Z",
+ *               "matchdate": "2018-10-26T15:45:00.000Z",
  *               "time": "2019-01-10T12:34:24.576Z"
  *           },
  *           "game": "League of Legends",
  *           "state": 2,
  *           "_id": "5c373bd0cde84e428ce07d3d",
- *           "title": "FNC VS IG",
+ *           "title": "LEC - G2 vs MSF",
  *           "participant": [
  *               {
- *                   "score": 0,
+ *                   "score": 1,
  *                   "_id": "5c373bd0cde84e428ce07d3f",
- *                   "participantnom": "Fnatic",
- *                   "coteparticipant": 2.5
+ *                   "participantnom": "G2",
+ *                   "coteparticipant": 1.02
  *               },
  *               {
- *                   "score": 3,
+ *                   "score": 0,
  *                   "_id": "5c373bd0cde84e428ce07d3e",
- *                   "participantnom": "Invictus Gaming",
- *                   "coteparticipant": 1.5
+ *                   "participantnom": "Misfits",
+ *                   "coteparticipant": 2.25
  *               }
  *           ],
- *           "winner": "5c373bd0cde84e428ce07d3e"
+ *           "winner": "5c373bd0cde84e428ce07d3f"
  *       }
  * 
  *

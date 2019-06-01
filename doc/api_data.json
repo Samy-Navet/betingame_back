@@ -220,7 +220,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK",
+          "content": "HTTP/1.1 200 OK\n {\n      \"dates\": {\n          \"matchdate\": \"2018-10-26T15:45:00.000Z\",\n          \"time\": \"2019-01-10T12:34:24.576Z\"\n      },\n      \"game\": \"League of Legends\",\n      \"state\": 0,\n      \"_id\": \"5c373bd0cde84e428ce07d3d\",\n      \"title\": \"LEC - G2 vs MSF\",\n      \"participant\": [\n          {\n              \"score\": 0,\n              \"_id\": \"5c373bd0cde84e428ce07d3f\",\n              \"participantnom\": \"G2\",\n              \"coteparticipant\": 1.02\n          },\n          {\n              \"score\": 0,\n              \"_id\": \"5c373bd0cde84e428ce07d3e\",\n              \"participantnom\": \"Misfits\",\n              \"coteparticipant\": 2.25\n          }\n      ],\n      \"winner\": null\n  }",
           "type": "json"
         }
       ]
@@ -606,7 +606,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n {\n      \"dates\": {\n          \"matchdate\": \"2018-11-03T05:30:00.000Z\",\n          \"time\": \"2019-01-10T12:34:24.576Z\"\n      },\n      \"game\": \"League of Legends\",\n      \"state\": 2,\n      \"_id\": \"5c373bd0cde84e428ce07d3d\",\n      \"title\": \"FNC VS IG\",\n      \"participant\": [\n          {\n              \"score\": 0,\n              \"_id\": \"5c373bd0cde84e428ce07d3f\",\n              \"participantnom\": \"Fnatic\",\n              \"coteparticipant\": 2.5\n          },\n          {\n              \"score\": 3,\n              \"_id\": \"5c373bd0cde84e428ce07d3e\",\n              \"participantnom\": \"Invictus Gaming\",\n              \"coteparticipant\": 1.5\n          }\n      ],\n      \"winner\": \"5c373bd0cde84e428ce07d3e\"\n  }",
+          "content": "HTTP/1.1 200 OK\n {\n      \"dates\": {\n          \"matchdate\": \"2018-10-26T15:45:00.000Z\",\n          \"time\": \"2019-01-10T12:34:24.576Z\"\n      },\n      \"game\": \"League of Legends\",\n      \"state\": 2,\n      \"_id\": \"5c373bd0cde84e428ce07d3d\",\n      \"title\": \"LEC - G2 vs MSF\",\n      \"participant\": [\n          {\n              \"score\": 1,\n              \"_id\": \"5c373bd0cde84e428ce07d3f\",\n              \"participantnom\": \"G2\",\n              \"coteparticipant\": 1.02\n          },\n          {\n              \"score\": 0,\n              \"_id\": \"5c373bd0cde84e428ce07d3e\",\n              \"participantnom\": \"Misfits\",\n              \"coteparticipant\": 2.25\n          }\n      ],\n      \"winner\": \"5c373bd0cde84e428ce07d3f\"\n  }",
           "type": "json"
         }
       ]
@@ -824,7 +824,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\n      {\n      \"_id\": \"5ca3169662ca77093cc91f22\",\n      \"username\": \"toto\",\n      \"email\": \"toto@gmail.com\",\n      \"admin\": false,\n      \"tokens\": [\n          {\n              \"access\": \"auth\",\n              \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n          }\n      ]\n  }",
+          "content": "HTTP/1.1 200 OK\n {\n     \"_id\": \"5cf26e209b22561e6c6d957a\",\n     \"username\": \"Damso\",\n     \"email\": \"noir@gmail.com\",\n     \"admin\": false,\n     \"money\": 520,\n     \"stats\": {\n         \"score\": 60,\n         \"betsNumber\": 1,\n         \"wonBets\": 1,\n         \"canceledBets\": 0,\n         \"coteAverage\": 3,\n         \"betAverage\": 20,\n         \"updatedAt\": \"2019-06-01T12:29:42.705Z\"\n     }\n }",
           "type": "json"
         }
       ]
@@ -910,7 +910,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[\n      {\n          \"_id\": \"5ca3169662ca77093cc91f22\",\n          \"username\": \"toto\",\n          \"email\": \"toto@gmail.com\",\n          \"money\" : 430,\n          \"rank\" : {\n             \"score\": 225,\n             \"betsNumber\": 1,\n             \"wonBets\": 1,\n             \"canceledBets\": 0,\n             \"coteAverage\": 6,\n             \"betAverage\": 23.5,\n         }\n      }\n  ]",
+          "content": "HTTP/1.1 200 OK\n[\n      {\n          \"_id\": \"5ca3169662ca77093cc91f22\",\n          \"username\": \"toto\",\n          \"email\": \"toto@gmail.com\",\n          \"admin\": false,\n          \"money\" : 430,\n          \"rank\" : {\n             \"score\": 225,\n             \"betsNumber\": 1,\n             \"wonBets\": 1,\n             \"canceledBets\": 0,\n             \"coteAverage\": 6,\n             \"betAverage\": 23.5,\n         }\n      }\n  ]",
           "type": "json"
         }
       ]
@@ -987,8 +987,13 @@
       },
       "examples": [
         {
+          "title": "Success-Header:",
+          "content": "{ \"x-auth\": \"azd546sdsz54_XadfDrf645\" }",
+          "type": "json"
+        },
+        {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      \"_id\": \"5ca3169662ca77093cc91f22\",\n      \"username\": \"toto\",\n      \"email\": \"toto@gmail.com\",\n      \"admin\": false,\n      \"tokens\": [\n          {\n              \"access\": \"auth\",\n              \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n          }\n      ]\n  }",
+          "content": "  HTTP/1.1 200 OK\n\n{\n    \"_id\": \"5cf26e209b22561e6c6d957a\",\n    \"username\": \"Damso\",\n    \"email\": \"noir@gmail.com\",\n    \"admin\": false,\n    \"money\": 520,\n    \"stats\": {\n        \"score\": 60,\n        \"betsNumber\": 1,\n        \"wonBets\": 1,\n        \"canceledBets\": 0,\n        \"coteAverage\": 3,\n        \"betAverage\": 20,\n        \"updatedAt\": \"2019-06-01T12:29:42.705Z\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -1082,6 +1087,7 @@
     "title": "get the ranking list",
     "name": "userRankList",
     "group": "User",
+    "description": "<p>route similar than user list but made for the ranking</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1257,8 +1263,13 @@
       },
       "examples": [
         {
+          "title": "Success-Header:",
+          "content": "{ \"x-auth\": \"azd546sdsz54_XadfDrf645\" }",
+          "type": "json"
+        },
+        {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n      \"_id\": \"5ca3169662ca77093cc91f22\",\n      \"username\": \"toto\",\n      \"email\": \"toto@gmail.com\",\n      \"admin\": false,\n      \"tokens\": [\n          {\n              \"access\": \"auth\",\n              \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n          }\n      ]\n  }",
+          "content": "  HTTP/1.1 200 OK\n\n{\n    \"_id\": \"5cf26e209b22561e6c6d957a\",\n    \"username\": \"Damso\",\n    \"email\": \"noir@gmail.com\",\n    \"admin\": false,\n    \"money\": 520,\n    \"stats\": {\n        \"score\": 0,\n        \"betsNumber\": 0,\n        \"wonBets\": 0,\n        \"canceledBets\": 0,\n        \"coteAverage\": 0,\n        \"betAverage\": 0,\n        \"updatedAt\": \"2019-06-01T12:29:42.705Z\"\n    }\n}",
           "type": "json"
         }
       ]
