@@ -12,20 +12,28 @@
  * @apiSuccess {String} admin state of the User.
  * @apiSuccess {Object[]} tokens array of tokens of the User.
  *
+ * @apiSuccessExample {json} Success-Header:
+ *       { "x-auth": "azd546sdsz54_XadfDrf645" }
+ *       
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
- *     {
- *           "_id": "5ca3169662ca77093cc91f22",
- *           "username": "toto",
- *           "email": "toto@gmail.com",
- *           "admin": false,
- *           "tokens": [
- *               {
- *                   "access": "auth",
- *                   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA"
- *               }
- *           ]
+ * 
+ *   {
+ *       "_id": "5cf26e209b22561e6c6d957a",
+ *       "username": "Damso",
+ *       "email": "noir@gmail.com",
+ *       "admin": false,
+ *       "money": 520,
+ *       "stats": {
+ *           "score": 60,
+ *           "betsNumber": 1,
+ *           "wonBets": 1,
+ *           "canceledBets": 0,
+ *           "coteAverage": 3,
+ *           "betAverage": 20,
+ *           "updatedAt": "2019-06-01T12:29:42.705Z"
  *       }
+ *   }
  *
  */
 var {User} = require('./../../Models/User');

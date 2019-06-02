@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const _ = require('lodash')
 
 // config db
 var {mongoose} = require('./db/mongoose');
@@ -14,7 +13,6 @@ const docRoute = require('./routes/docRoute');
 
 // middlewares
 var {authenticate} = require('./middleware/authenticate')
-var {admin} = require('./middleware/adminAuthenticate')
 
 const port = process.env.PORT || 8080;
 
@@ -36,5 +34,5 @@ matchRoute(app);
 betRoute(app);
 docRoute(app);
 app.listen(port, function() {
-    console.log('Server en écoute :) port '+port);
+    console.log('Server en écoute port '+port);
 });

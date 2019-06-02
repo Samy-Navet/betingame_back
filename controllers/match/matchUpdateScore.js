@@ -78,7 +78,6 @@ const matchUpdateScore = (req,res) => {
                 match.winner = body.winner;
                 match.participant[0].score = body.participant[0];
                 match.participant[1].score = body.participant[1];
-                // res.send(match);
                 Match.updateOne({_id : id}, {$set: match}, {new: true}).then((result)=>{
                     res.status(200).send(match);
                     betUpdate.updateBetsAfterMatch(id);
