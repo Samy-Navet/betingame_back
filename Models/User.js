@@ -33,18 +33,60 @@ var UserSchema = new mongoose.Schema({
       message: props => `${props.value} is not a valid email address!`
     }
   },
+  money: {
+    type: Number,
+    required: true,
+    default: 0
+  },
   admin: {
     type: Boolean,
     default: false
   },
-  tokens: [{
-    access: {
-        type: String
+  token: {
+    type:String
+  },
+  stats : {
+    score: {
+      type: Number,
+      required: true,
+      default: 0
     },
-    token: {
-     type: String
+  
+    betsNumber: {
+      type: Number,
+      default: 0,
+      required : true
+    },
+  
+    wonBets: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+  
+    canceledBets: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+    coteAverage: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+  
+    betAverage: {
+      type: Number,
+      default: 0,
+      required: true
+    },
+
+    updatedAt: {
+      type: Date,
+      default: Date.now(),
+      required: true
     }
-  }]
+  }
 }, {collection: 'user'});
 
 UserSchema.methods.toJSON = function () {
@@ -52,15 +94,14 @@ UserSchema.methods.toJSON = function () {
   var userObject = user.toObject();
 
   // return userObject;
-  return _.pick(userObject, ['_id', 'username', 'email','admin','tokens']);
+  return _.pick(userObject, ['_id', 'username', 'email','admin','money','stats']);
 };
 
 UserSchema.methods.generateAuthToken = function () {
   var user = this;
-  var access = 'auth';
-  var token = jwt.sign({_id: user._id.toHexString(), access}, 'Monkey D Luffy').toString();
+  var token = jwt.sign({_id: user._id.toHexString()}, 'Monkey D Luffy').toString();
 
- user.tokens =  user.tokens.concat([{access, token}]);
+  user.token =  token;
 
   return user.save().then(() => {
     return {user, token};
@@ -70,7 +111,7 @@ UserSchema.methods.generateAuthToken = function () {
 UserSchema.statics.findByToken = function(token){
   var User = this;
   var decoded;
-
+  
   try {
     decoded = jwt.verify(token, 'Monkey D Luffy');
   } catch (e) {
@@ -79,8 +120,7 @@ UserSchema.statics.findByToken = function(token){
 
   return User.findOne({
     '_id': decoded._id,
-    'tokens.token': token,
-    'tokens.access': 'auth'
+    'token': token,
   }); 
 }
 
@@ -101,30 +141,32 @@ UserSchema.pre('save', function (next) {
 
 UserSchema.statics.findByCredentials = function (username, password) {
   var User = this;
-  return User.findOne({username}).then((user) => {
+  return User.findOne({$or : [{'username': username},{'email': username}]}).then((user) => {
     if (!user) {
       return Promise.reject();
     }
-
-    return new Promise((resolve, reject) => {
-      // Use bcrypt.compare to compare password and user.password
-      bcrypt.compare(password, user.password, (err, res) => {
-        if (res) {
-          resolve(user);
-        } else {
-          reject();
-        }
-      });
-    });
+    else
+    {
+      return new Promise((resolve, reject) =>{
+        // Use bcrypt.compare to compare password and user.password
+        bcrypt.compare(password, user.password, (err, res) => {
+          if (res) {
+            resolve(user);
+          } else {
+            reject();
+          }
+        });
+        // resolve(user);
+      })
+    }
   });
 };
-
-UserSchema.methods.removeToken = function (token) {
+UserSchema.methods.removeToken = function (oldtoken) {
   var user = this;
 
   return user.updateOne({
-    $pull: {
-      tokens: {token}
+    $unset: {
+      token: oldtoken
     }
   });
 };
@@ -140,13 +182,5 @@ UserSchema.statics.getMails = function () {
 
 var User = mongoose.model('user', UserSchema);
 
-// var nvUser = new User({username: "toto", password: "tata", email: "tutu", admin: true});
-// nvUser.save().then((succes) => {
-//     console.log(succes)
-// }, (err) =>{
-//     console.log(err)
-// })
-
-// User.getMails();
 
 module.exports = {User}
