@@ -617,7 +617,7 @@
   },
   {
     "type": "put",
-    "url": "/match/:id",
+    "url": "/match/:id/score/",
     "title": "update match score and status",
     "name": "matchUpdateScore",
     "group": "Match",
@@ -758,7 +758,7 @@
   {
     "type": "get",
     "url": "/user/:id",
-    "title": "request user information",
+    "title": "get user information",
     "name": "userDetails",
     "group": "User",
     "header": {
@@ -814,10 +814,17 @@
           },
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Number",
             "optional": false,
-            "field": "tokens",
-            "description": "<p>array of tokens of the User.</p>"
+            "field": "Money",
+            "description": "<p>Money of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "stats",
+            "description": "<p>object of stats of the User.</p>"
           }
         ]
       },
@@ -836,7 +843,7 @@
   {
     "type": "get",
     "url": "/user/",
-    "title": "request users list",
+    "title": "get users list",
     "name": "userList",
     "group": "User",
     "header": {
@@ -893,17 +900,17 @@
           },
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Number",
             "optional": false,
-            "field": "token",
-            "description": "<p>token of the User.</p>"
+            "field": "Money",
+            "description": "<p>Money of the user.</p>"
           },
           {
             "group": "Success 200",
             "type": "Object",
             "optional": false,
             "field": "stats",
-            "description": "<p>Object with the stats of the user.</p>"
+            "description": "<p>object of stats of the User.</p>"
           }
         ]
       },
@@ -922,7 +929,7 @@
   {
     "type": "post",
     "url": "/user/login",
-    "title": "Login and request user information",
+    "title": "Login and get user information",
     "name": "userLogin",
     "group": "User",
     "parameter": {
@@ -978,10 +985,17 @@
           },
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Number",
             "optional": false,
-            "field": "tokens",
-            "description": "<p>array of tokens of the User.</p>"
+            "field": "Money",
+            "description": "<p>Money of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "stats",
+            "description": "<p>object of stats of the User.</p>"
           }
         ]
       },
@@ -1184,7 +1198,7 @@
   {
     "type": "post",
     "url": "/user/",
-    "title": "Register and request user information",
+    "title": "Register and get user information",
     "name": "userRegister",
     "group": "User",
     "parameter": {
@@ -1254,10 +1268,17 @@
           },
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Number",
             "optional": false,
-            "field": "tokens",
-            "description": "<p>array of tokens of the User.</p>"
+            "field": "Money",
+            "description": "<p>Money of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "stats",
+            "description": "<p>object of stats of the User.</p>"
           }
         ]
       },
@@ -1276,6 +1297,118 @@
     },
     "version": "0.0.0",
     "filename": "controllers/user/userRegister.js",
+    "groupTitle": "User"
+  },
+  {
+    "type": "put",
+    "url": "/user/:id",
+    "title": "update user information",
+    "name": "userUpdate",
+    "group": "User",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "x-auth",
+            "description": "<p>User unique access-key.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"x-auth\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2EzMTY5NjYyY2E3NzA5M2NjOTFmMjIiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTU0MTkyMDIyfQ.6pdnH28nqxj4jVVF90kwK41RQfuiPCMMm_j08BexmkA\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User username string.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password string.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email string.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "admin",
+            "description": "<p>Users state boolean.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>username of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>email of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "admin",
+            "description": "<p>state of the User.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "Money",
+            "description": "<p>Money of the user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "stats",
+            "description": "<p>object of stats of the User.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "  HTTP/1.1 200 OK\n\n{\n    \"_id\": \"5cf26e209b22561e6c6d957a\",\n    \"username\": \"Damso\",\n    \"email\": \"noir@gmail.com\",\n    \"admin\": false,\n    \"money\": 520,\n    \"stats\": {\n        \"score\": 0,\n        \"betsNumber\": 0,\n        \"wonBets\": 0,\n        \"canceledBets\": 0,\n        \"coteAverage\": 0,\n        \"betAverage\": 0,\n        \"updatedAt\": \"2019-06-01T12:29:42.705Z\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "controllers/user/userUpdate.js",
     "groupTitle": "User"
   }
 ]

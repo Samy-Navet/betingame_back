@@ -1,5 +1,5 @@
 /**
- * @api {post} /user/login Login and request user information
+ * @api {post} /user/login Login and get user information
  * @apiName userLogin
  * @apiGroup User
  *
@@ -10,7 +10,8 @@
  * @apiSuccess {String} username username of the User.
  * @apiSuccess {String} email email of the User.
  * @apiSuccess {String} admin state of the User.
- * @apiSuccess {Object[]} tokens array of tokens of the User.
+ * @apiSuccess {Number} Money Money of the user.
+ * @apiSuccess {Object} stats object of stats of the User.
  *
  * @apiSuccessExample {json} Success-Header:
  *       { "x-auth": "azd546sdsz54_XadfDrf645" }
