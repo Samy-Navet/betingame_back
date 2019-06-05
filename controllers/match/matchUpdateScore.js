@@ -1,5 +1,5 @@
 /**
- * @api {put} /match/:id update match score and status
+ * @api {put} /match/:id/score/ update match score and status
  * @apiName matchUpdateScore
  * @apiGroup Match
  *

@@ -1,5 +1,5 @@
 /**
- * @api {get} /user/:id request user information
+ * @api {get} /user/:id get user information
  * @apiName userDetails
  * @apiGroup User
  *
@@ -14,7 +14,8 @@
  * @apiSuccess {String} username username of the User.
  * @apiSuccess {String} email email of the User.
  * @apiSuccess {String} admin state of the User.
- * @apiSuccess {Object[]} tokens array of tokens of the User.
+ * @apiSuccess {Number} Money Money of the user.
+ * @apiSuccess {Object} stats object of stats of the User.
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
