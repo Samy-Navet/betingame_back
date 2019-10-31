@@ -10,7 +10,4 @@ Aller dans le bash et se postionner au niveau du dossier : "cd chemin/vers/dossi
 utiliser la commande "node server.js"
 Voila, tu peux tester les routes avec postman :)
 
-## production : 
 
-la production se trouve sur : https://betingame.herokuapp.com/
-la documentation se trouve sur : https://betingame.herokuapp.com/doc/
