@@ -3,11 +3,6 @@
  * @apiName matchList
  * @apiGroup Match
  *
- *@apiHeader {String} x-auth Users unique token.
- * @apiHeaderExample {json} Header-Example:
- *     {
- *       "x-auth": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YzM3MjBjMWJjZGY0NDFjYjQzNzVmYzciLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTQ3MTE2NzM4fQ.qPdV5j5Rq4aR9sdSydHpbRfGkzjKT84--KRQtM"
- *     }
  * 
  * @apiParam {String} for_bets FOR THE APP : match list only for bets (in the app) => for_bets = 1.
  * 
