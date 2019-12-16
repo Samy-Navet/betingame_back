@@ -16,7 +16,7 @@
     "express": "^4.16.4",
     "jsonpath": "^1.0.1",
     "jsonwebtoken": "^8.5.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "mongoose": "^5.4.19",
     "validator": "^10.11.0"
   },
@@ -25,7 +25,7 @@
   },
   "apidoc": {
     "title": "BetInGame documentation",
-    "url" : "https://betingame.herokuapp.com"
+    "url": "https://betingame.herokuapp.com"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
